@@ -1,12 +1,13 @@
 [package]
 name = "lang-id"
-version = "0.0.1-alpha.1"
+version = "0.0.1-alpha.2"
 edition = "2021"
 license = "MIT/Apache-2.0"
 authors = ["Moe <m@tmoe.me>"]
 keywords = ["internationalization", "localization"]
 readme = "Readme.md"
 repository = "https://github.com/2moe/lang-id"
+documentation = "https://docs.rs/lang-id/"
 description = "Const lang-ids and maps are provided, mainly for i18n and l10n."
 
 [features]
@@ -23,5 +24,5 @@ tinystr = { version = "0.7.1", optional = true, default-features = false }
 unic-langid = "0.9.1"
 
 [package.metadata.docs.rs]
-all-features = true
+# all-features = true
 targets = ["x86_64-unknown-linux-gnu"]
