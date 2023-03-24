@@ -7,7 +7,7 @@
 //!
 //! ```
 //! use lang_id::LangID;
-//! 
+//!
 //! const DEFAULT_LANG: LangID = unsafe { lang_id::consts::get_en() };
 //! ```
 //!
@@ -55,6 +55,7 @@ pub mod sys_lang;
 mod tests {
 
     #[test]
+    #[cfg(feature = "map")]
     fn minimize_zh_sg() {
         let map = crate::map::min::min_map();
         let sg = map["zh-Hans-SG"];
