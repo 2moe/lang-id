@@ -599,6 +599,15 @@ pub const fn match_id(s: &[u8]) -> LangID {
             b"zh-HK" | b"zh-Hant-HK" => get_zh_hant_hk(),
             b"zh-MO" | b"zh-Hant-MO" => get_zh_hant_mo(),
             b"zu" => get_zu(),
+            b"st" => get_st(),
+            b"la" => get_la(),
+            b"ny" => get_ny(),
+            b"sm" => get_sm(),
+            b"jw" => get_jw(),
+            b"ht" => get_ht(),
+            b"co" => get_co(),
+            b"tl" => get_tl(),
+            b"iw" => get_iw(),
             _ => get_und(),
         }
     }
@@ -1192,6 +1201,15 @@ pub const fn get_fn_name(s: &[u8]) -> &str {
         b"zh-HK" | b"zh-Hant-HK" => "get_zh_hant_hk()",
         b"zh-MO" | b"zh-Hant-MO" => "get_zh_hant_mo()",
         b"zu" => "get_zu()",
+        b"st" => "get_st()",
+        b"la" => "get_la()",
+        b"ny" => "get_ny()",
+        b"sm" => "get_sm()",
+        b"jw" => "get_jw()",
+        b"ht" => "get_ht()",
+        b"co" => "get_co()",
+        b"tl" => "get_tl()",
+        b"iw" => "get_iw()",
         _ => "",
     }
 }

@@ -2921,3 +2921,48 @@ pub const unsafe fn get_zh_hant_mo() -> LangID {
 pub const unsafe fn get_zu() -> LangID {
     ID::new(30074, None, None).get_id()
 }
+
+/// st: (st-Latn-ZA)
+pub const unsafe fn get_st() -> LangID {
+    ID::new(29811, None, None).get_id()
+}
+
+/// la: (la-Latn-VA)
+pub const unsafe fn get_la() -> LangID {
+    ID::new(24940, None, None).get_id()
+}
+
+/// ny: (ny-Latn-MW)
+pub const unsafe fn get_ny() -> LangID {
+    ID::new(31086, None, None).get_id()
+}
+
+/// sm: (sm-Latn-WS)
+pub const unsafe fn get_sm() -> LangID {
+    ID::new(28019, None, None).get_id()
+}
+
+/// jw: (jw-Latn-ID)
+pub const unsafe fn get_jw() -> LangID {
+    ID::new(30570, None, None).get_id()
+}
+
+/// ht: (ht-Latn-HT)
+pub const unsafe fn get_ht() -> LangID {
+    ID::new(29800, None, None).get_id()
+}
+
+/// co: (co-Latn-FR)
+pub const unsafe fn get_co() -> LangID {
+    ID::new(28515, None, None).get_id()
+}
+
+/// tl: (tl-Latn-PH)
+pub const unsafe fn get_tl() -> LangID {
+    ID::new(27764, None, None).get_id()
+}
+
+/// iw: (iw-Hebr-IL)
+pub const unsafe fn get_iw() -> LangID {
+    ID::new(30569, None, None).get_id()
+}

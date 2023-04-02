@@ -606,6 +606,15 @@ pub const MAX_MAP: phf::Map<&'static str, TinyID> = {
     "zh-Hant-HK" => TinyID::new("zh", "Hant", "HK"),
     "zh-Hant-MO" => TinyID::new("zh", "Hant", "MO"),
     "zu" => TinyID::new("zu", "Latn", "ZA"),
+    "st" => TinyID::new("st", "Latn", "ZA"),
+    "la" => TinyID::new("la", "Latn", "VA"),
+    "ny" => TinyID::new("ny", "Latn", "MW"),
+    "sm" => TinyID::new("sm", "Latn", "WS"),
+    "jw" => TinyID::new("jw", "Latn", "ID"),
+    "ht" => TinyID::new("ht", "Latn", "HT"),
+    "co" => TinyID::new("co", "Latn", "FR"),
+    "tl" => TinyID::new("tl", "Latn", "PH"),
+    "iw" => TinyID::new("iw", "Hebr", "IL"),
     }
 };
 
