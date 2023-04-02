@@ -13,6 +13,8 @@
 //!
 //! Maximize:
 //!
+//! Note: Finding Maximized by MAX_MAP does not enumerate all cases.
+//!
 //! ```
 //! let map = lang_id::map::max::MAX_MAP;
 //! let zh = &map["zh"];
@@ -26,8 +28,8 @@
 //! ```
 //! let map = lang_id::map::min::min_map();
 //!
-//! let sg = map["zh-Hans-SG"];
-//! assert_eq!(sg, "zh-SG");
+//! let sg = map.get("zh-Hans-SG");
+//! assert_eq!(sg, Some(&"zh-SG"));
 //! ```
 //!
 //! Get description of a language:
@@ -37,7 +39,6 @@
 //! let ja = map.get("ja");
 //! assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 //! ```
-//!
 pub mod consts;
 mod id;
 pub type LangID = unic_langid::LanguageIdentifier;
@@ -45,6 +46,7 @@ pub type LangID = unic_langid::LanguageIdentifier;
 #[cfg(feature = "map")]
 pub mod map;
 
+#[cfg(feature = "match")]
 pub mod get;
 
 /// The sys-lang module is used to get the current system's locale and convert it into LangID.

@@ -2742,7 +2742,7 @@ pub const unsafe fn get_uk() -> LangID {
     ID::new(27509, None, None).get_id()
 }
 
-/// und: (en-Latn-US) und, Latn, US
+/// Undefined.
 pub const unsafe fn get_und() -> LangID {
     ID::new(6581877, None, None).get_id()
 }

@@ -19,6 +19,8 @@ const DEFAULT_LANG: LangID = unsafe { lang_id::consts::get_en() };
 
 Maximize:
 
+Note: Finding Maximized by MAX_MAP does not enumerate all cases.
+
 ```rust
 let map = lang_id::map::max::MAX_MAP;
 let zh = &map["zh"];
@@ -32,8 +34,8 @@ Minimize:
 ```rust
 let map = lang_id::map::min::min_map();
 
-let sg = map["zh-Hans-SG"];
-assert_eq!(sg, "zh-SG");
+let sg = map.get("zh-Hans-SG");
+assert_eq!(sg, Some(&"zh-SG"));
 ```
 
 Get description of a language:

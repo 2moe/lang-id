@@ -1,3 +1,4 @@
+#![allow(clippy::missing_safety_doc)]
 use crate::LangID;
 use unic_langid::subtags::{self, Language};
 

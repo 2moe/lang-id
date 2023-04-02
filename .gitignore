@@ -1,2 +1,9 @@
+/*
+
 target
-Cargo.lock
+
+!/src
+!/Cargo.toml
+!/LICENSE*
+!/Readme*.md
+!/.git*

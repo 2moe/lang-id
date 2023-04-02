@@ -1,19 +1,19 @@
 [package]
 name = "lang-id"
-version = "0.0.1-alpha.4"
+version = "0.0.1-beta.1"
 edition = "2021"
 license = "MIT/Apache-2.0"
 authors = ["Moe <m@tmoe.me>"]
-keywords = ["internationalization", "localization"]
+categories = ["internationalization", "localization"]
 readme = "Readme.md"
 repository = "https://github.com/2moe/lang-id"
-documentation = "https://docs.rs/lang-id/"
 description = "Const lang-ids and maps are provided, mainly for i18n and l10n."
 
 [features]
-default = ["sys-lang"]
+default = ["sys-lang", "match"]
 map = ["dep:phf", "dep:tinystr"]
 sys-lang = ["dep:sys-locale"]
+match = []
 
 [dependencies]
 phf = { version = "0.11.1", optional = true, default-features = false, features = [
