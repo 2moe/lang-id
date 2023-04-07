@@ -636,3 +636,12 @@ Here is the complete table.
 | zh-Hant-HK | zh-Hant-HK   | 繁體中文, 中國香港                                    |
 | zh-Hant-MO | zh-Hant-MO   | 繁體中文, 中國澳門                                    |
 | zu         | zu-Latn-ZA   | isiZulu, isi-Latin, iNingizimu Afrika                 |
+| st         | st-Latn-ZA   |                                                       |
+| la         | la-Latn-VA   |                                                       |
+| ny         | ny-Latn-MW   |                                                       |
+| sm         | sm-Latn-WS   |                                                       |
+| jw         | jw-Latn-ID   |                                                       |
+| ht         | ht-Latn-HT   |                                                       |
+| co         | co-Latn-FR   |                                                       |
+| tl         | tl-Latn-PH   |                                                       |
+| iw         | iw-Hebr-IL   |                                                       |
