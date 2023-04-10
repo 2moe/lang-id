@@ -1,5 +1,7 @@
 # Lang-ID
 
+[![crates.io](https://img.shields.io/crates/v/lang-id.svg)](https://crates.io/crates/lang-id)
+
 [![Documentation](https://docs.rs/lang-id/badge.svg)](https://docs.rs/lang-id)
 
 [![MIT/Apache-2 licensed](https://img.shields.io/crates/l/lang-id.svg)](./LICENSE-APACHE)

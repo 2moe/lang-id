@@ -1,5 +1,15 @@
+use std::env;
+
 use crate::{consts::get_en, LangID};
 pub use sys_locale::get_locale;
+
+fn get_env_lang() -> LangID {
+    env::var("LANG")
+        .iter()
+        .find_map(|x| x.split('.').next())
+        .and_then(|x| x.parse::<LangID>().ok())
+        .unwrap_or_else(|| unsafe { get_en() })
+}
 
 /// Returns the current language identification code based on the system's locale settings.
 ///
@@ -17,12 +27,13 @@ pub use sys_locale::get_locale;
 /// dbg!(cur);
 /// ```
 pub fn current() -> LangID {
-    get_opt_id().unwrap_or_else(|| unsafe { get_en() }) // If parsing fails, return the English LangID variant
+    get_opt_id().unwrap_or_else(get_env_lang) // If parsing fails, return the English LangID variant
 }
 
 /// Gets the system locale string, if None, then returns "en".
 pub fn get_locale_or_default() -> String {
-    get_locale().unwrap_or_else(|| "en".to_owned())
+    get_locale()
+        .unwrap_or_else(|| env::var("LANG").unwrap_or_else(|_| "en".to_owned()))
 }
 
 fn get_opt_id() -> Option<LangID> {

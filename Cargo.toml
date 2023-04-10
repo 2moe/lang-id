@@ -1,6 +1,6 @@
 [package]
 name = "lang-id"
-version = "0.0.1-beta.2"
+version = "0.0.1-beta.3"
 edition = "2021"
 license = "MIT/Apache-2.0"
 authors = ["Moe <m@tmoe.me>"]
@@ -19,10 +19,15 @@ match = []
 phf = { version = "0.11.1", optional = true, default-features = false, features = [
     "macros",
 ] }
-sys-locale = { version = "0.3.0", optional = true }
 tinystr = { version = "0.7.1", optional = true, default-features = false }
 unic-langid = { version = "0.9.1", features = ["likelysubtags"] }
+
+# [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+sys-locale = { version = "0.3.0", optional = true }
+# [target.'cfg(target_arch = "wasm32")'.dependencies]
+# sys-locale = { version = "0.3.0", optional = true, features = ["js"] }
 
 [package.metadata.docs.rs]
 all-features = true
 targets = ["x86_64-unknown-linux-gnu"]
+rustdoc-args = ["--cfg", "__lang_id_doc"]

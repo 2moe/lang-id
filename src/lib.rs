@@ -1,3 +1,5 @@
+#![cfg_attr(__lang_id_doc, feature(doc_auto_cfg, doc_notable_trait))]
+
 //! This library provides a series of const lang-ids which can be found in the `consts` module.
 //! Additionally, it provides some handy maps.
 //!
