@@ -1,9 +1,46 @@
+# black list
 /*
-
 target
+tmp
+tmp.*
 
+## traditional linux & .*BSD$
+.directory
+LOST.DIR
+.Trash-*
+## android
+.thumbnails*
+# .nomedia
+## macOS
+.DS_Store
+Icon?
+.Spotlight-V100
+.fseventsd
+.Trashes/
+.apDisk
+.TemporaryItems/
+## windows
+desktop.ini
+Thumbs.db
+Thumbs.db:encryptable
+$RECYCLE.BIN/
+~$*.tmp
+
+perf.data
+perf.data.old
+flamegraph.svg
+
+# white list
 !/src
 !/Cargo.toml
+!/Cargo.lock
+!/License
 !/LICENSE*
+!/docs
 !/Readme*.md
 !/.git*
+!/build.rs
+!/.rustfmt.toml
+!/rust-toolchain.toml
+!/tests
+!/examples

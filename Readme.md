@@ -9,6 +9,8 @@
 This library provides a series of const lang-ids which can be found in the `consts` module.
 Additionally, it provides some handy maps.
 
+---
+
 ## Examples
 
 Using the result of a const fn as a value:
@@ -21,10 +23,10 @@ const DEFAULT_LANG: LangID = unsafe { lang_id::consts::get_en() };
 
 Maximize:
 
-Note: Finding Maximized by MAX_MAP does not enumerate all cases.
+Note: Finding Maximized by `max::map()` does not enumerate all cases.
 
 ```rust
-let map = lang_id::map::max::MAX_MAP;
+let map = lang_id::maps::max::map();
 let zh = &map["zh"];
 assert_eq!(zh.language, "zh");
 assert_eq!(zh.script, "Hans");
@@ -34,7 +36,7 @@ assert_eq!(zh.region, "CN");
 Minimize:
 
 ```rust
-let map = lang_id::map::min::min_map();
+let map = lang_id::maps::min::map();
 
 let sg = map.get("zh-Hans-SG");
 assert_eq!(sg, Some(&"zh-SG"));
@@ -43,16 +45,14 @@ assert_eq!(sg, Some(&"zh-SG"));
 Get description of a language:
 
 ```rust
-let map = lang_id::map::description::desc_map();
+let map = lang_id::maps::description::map();
 let ja = map.get("ja");
 assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 ```
 
 ## Table
 
-Here is the complete table.
-
-| LangID     | Maximize     | Description                                           |
+| LangID     | Maximized    | Description                                           |
 | ---------- | ------------ | ----------------------------------------------------- |
 | af         | af-Latn-ZA   | Afrikaans, Latyn, Suid-Afrika                         |
 | af-NA      | af-Latn-NA   | Afrikaans, Latyn, Namibië                             |
@@ -77,7 +77,7 @@ Here is the complete table.
 | ar-LY      | ar-Arab-LY   | العربية, العربية, ليبيا                               |
 | ar-MA      | ar-Arab-MA   | العربية, العربية, المغرب                              |
 | ar-MR      | ar-Arab-MR   | العربية, العربية, موريتانيا                           |
-| ar-OM      | ar-Arab-OM   | العربية, العربية, عُمان                               |
+| ar-OM      | ar-Arab-OM   | العربية, العربية, عُمان                                |
 | ar-PS      | ar-Arab-PS   | العربية, العربية, الأراضي الفلسطينية                  |
 | ar-QA      | ar-Arab-QA   | العربية, العربية, قطر                                 |
 | ar-SA      | ar-Arab-SA   | العربية, العربية, المملكة العربية السعودية            |
@@ -88,7 +88,7 @@ Here is the complete table.
 | ar-TD      | ar-Arab-TD   | العربية, العربية, تشاد                                |
 | ar-TN      | ar-Arab-TN   | العربية, العربية, تونس                                |
 | ar-YE      | ar-Arab-YE   | العربية, العربية, اليمن                               |
-| as         | as-Beng-IN   | অসমীয়া, বাংলা, ভাৰত                                  |
+| as         | as-Beng-IN   | অসমীয়া, বাংলা, ভাৰত                                         |
 | asa        | asa-Latn-TZ  | Kipare, Latn, Tadhania                                |
 | ast        | ast-Latn-ES  | asturianu, llatín, España                             |
 | az         | az-Latn-AZ   | azərbaycan, latın, Azərbaycan                         |
@@ -99,15 +99,15 @@ Here is the complete table.
 | bem        | bem-Latn-ZM  | Ichibemba, Latn, Zambia                               |
 | bez        | bez-Latn-TZ  | Hibena, Latn, Hutanzania                              |
 | bg         | bg-Cyrl-BG   | български, кирилица, България                         |
-| bgc        | bgc-Deva-IN  | हरियाणवी, देवानागारी, भारत                            |
-| bho        | bho-Deva-IN  | भोजपुरी, देवानागारी, भारत                             |
+| bgc        | bgc-Deva-IN  | हरियाणवी, देवानागारी, भारत                                     |
+| bho        | bho-Deva-IN  | भोजपुरी, देवानागारी, भारत                                      |
 | bm         | bm-Latn-ML   | bamanakan, Latn, Mali                                 |
-| bn         | bn-Beng-BD   | বাংলা, বাংলা, বাংলাদেশ                                |
-| bn-IN      | bn-Beng-IN   | বাংলা, বাংলা, ভারত                                    |
-| bo         | bo-Tibt-CN   | བོད་སྐད་, བོད་ཡིག་, རྒྱ་ནག                            |
-| bo-IN      | bo-Tibt-IN   | བོད་སྐད་, བོད་ཡིག་, རྒྱ་གར་                           |
+| bn         | bn-Beng-BD   | বাংলা, বাংলা, বাংলাদেশ                                          |
+| bn-IN      | bn-Beng-IN   | বাংলা, বাংলা, ভারত                                           |
+| bo         | bo-Tibt-CN   | བོད་སྐད་, བོད་ཡིག་, རྒྱ་ནག                                  |
+| bo-IN      | bo-Tibt-IN   | བོད་སྐད་, བོད་ཡིག་, རྒྱ་གར་                                 |
 | br         | br-Latn-FR   | brezhoneg, latin, Frañs                               |
-| brx        | brx-Deva-IN  | बर’, देबनागिरि, भारत                                  |
+| brx        | brx-Deva-IN  | बर’, देबनागिरि, भारत                                       |
 | bs         | bs-Latn-BA   | bosanski, latinica, Bosna i Hercegovina               |
 | bs-Cyrl    | bs-Cyrl-BA   | босански, ћирилица, Босна и Херцеговина               |
 | bs-Latn    | bs-Latn-BA   | bosanski, latinica, Bosna i Hercegovina               |
@@ -115,8 +115,8 @@ Here is the complete table.
 | ca-AD      | ca-Latn-AD   | català, llatí, Andorra                                |
 | ca-FR      | ca-Latn-FR   | català, llatí, França                                 |
 | ca-IT      | ca-Latn-IT   | català, llatí, Itàlia                                 |
-| ccp        | ccp-Cakm-BD  | 𑄌𑄋𑄴𑄟𑄳𑄦, 𑄌𑄇𑄴𑄟, 𑄝𑄁𑄣𑄘𑄬𑄌𑄴                                 |
-| ccp-IN     | ccp-Cakm-IN  | 𑄌𑄋𑄴𑄟𑄳𑄦, 𑄌𑄇𑄴𑄟, 𑄞𑄢𑄧𑄖𑄴                                   |
+| ccp        | ccp-Cakm-BD  | 𑄌𑄋𑄴𑄟𑄳𑄦, 𑄌𑄇𑄴𑄟, 𑄝𑄁𑄣𑄘𑄬𑄌𑄴                                       |
+| ccp-IN     | ccp-Cakm-IN  | 𑄌𑄋𑄴𑄟𑄳𑄦, 𑄌𑄇𑄴𑄟, 𑄞𑄢𑄧𑄖𑄴                                        |
 | ce         | ce-Cyrl-RU   | нохчийн, кириллица, Росси                             |
 | ceb        | ceb-Latn-PH  | Cebuano, Latin, Pilipinas                             |
 | cgg        | cgg-Latn-UG  | Rukiga, Latn, Uganda                                  |
@@ -137,11 +137,11 @@ Here is the complete table.
 | de-LI      | de-Latn-LI   | Deutsch, Lateinisch, Liechtenstein                    |
 | de-LU      | de-Latn-LU   | Deutsch, Lateinisch, Luxemburg                        |
 | dje        | dje-Latn-NE  | Zarmaciine, Latn, Nižer                               |
-| doi        | doi-Deva-IN  | डोगरी, देवनागरी, भारत                                 |
+| doi        | doi-Deva-IN  | डोगरी, देवनागरी, भारत                                       |
 | dsb        | dsb-Latn-DE  | dolnoserbšćina, łatyński, Nimska                      |
 | dua        | dua-Latn-CM  | duálá, Latn, Cameroun                                 |
 | dyo        | dyo-Latn-SN  | joola, Latn, Senegal                                  |
-| dz         | dz-Tibt-BT   | རྫོང་ཁ, ང་བཅས་ཀྱི་ཡིག་གུ, འབྲུག                       |
+| dz         | dz-Tibt-BT   | རྫོང་ཁ, ང་བཅས་ཀྱི་ཡིག་གུ, འབྲུག                               |
 | ebu        | ebu-Latn-KE  | Kĩembu, Latn, Kenya                                   |
 | ee         | ee-Latn-GH   | Eʋegbe, Latingbeŋɔŋlɔ, Ghana nutome                   |
 | ee-TG      | ee-Latn-TG   | Eʋegbe, Latingbeŋɔŋlɔ, Togo nutome                    |
@@ -289,17 +289,17 @@ Here is the complete table.
 | fa-AF      | fa-Arab-AF   | فارسی, عربی, افغانستان                                |
 | ff         | ff-Latn-SN   | Pulaar, Latn, Senegaal                                |
 | ff-Adlm    | ff-Adlm-GN   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤘𞤭𞤲𞤫                                    |
-| ff-Adlm-BF | ff-Adlm-BF   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤄𞤵𞤪𞤳𞤭𞤲𞤢 𞤊𞤢𞤧𞤮𞥅                           |
-| ff-Adlm-CM | ff-Adlm-CM   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤑𞤢𞤥𞤢𞤪𞤵𞥅𞤲                                |
+| ff-Adlm-BF | ff-Adlm-BF   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤄𞤵𞤪𞤳𞤭𞤲𞤢 𞤊𞤢𞤧𞤮𞥅                            |
+| ff-Adlm-CM | ff-Adlm-CM   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤑𞤢𞤥𞤢𞤪𞤵𞥅𞤲                                 |
 | ff-Adlm-GH | ff-Adlm-GH   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤘𞤢𞤲𞤢                                    |
 | ff-Adlm-GM | ff-Adlm-GM   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤘𞤢𞤥𞤦𞤭𞤴𞤢                                 |
-| ff-Adlm-GW | ff-Adlm-GW   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤘𞤭𞤲𞤫-𞤄𞤭𞤧𞤢𞤱𞤮𞥅                            |
-| ff-Adlm-LR | ff-Adlm-LR   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤂𞤢𞤦𞤭𞤪𞤭𞤴𞤢𞥄                               |
-| ff-Adlm-MR | ff-Adlm-MR   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤃𞤮𞤪𞤼𞤢𞤲𞤭𞥅                                |
-| ff-Adlm-NE | ff-Adlm-NE   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤐𞤭𞥅𞤶𞤫𞤪                                  |
-| ff-Adlm-NG | ff-Adlm-NG   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤐𞤢𞤶𞤫𞤪𞤭𞤴𞤢𞥄                               |
+| ff-Adlm-GW | ff-Adlm-GW   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤘𞤭𞤲𞤫-𞤄𞤭𞤧𞤢𞤱𞤮𞥅                             |
+| ff-Adlm-LR | ff-Adlm-LR   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤂𞤢𞤦𞤭𞤪𞤭𞤴𞤢𞥄                                |
+| ff-Adlm-MR | ff-Adlm-MR   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤃𞤮𞤪𞤼𞤢𞤲𞤭𞥅                                 |
+| ff-Adlm-NE | ff-Adlm-NE   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤐𞤭𞥅𞤶𞤫𞤪                                   |
+| ff-Adlm-NG | ff-Adlm-NG   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤐𞤢𞤶𞤫𞤪𞤭𞤴𞤢𞥄                                |
 | ff-Adlm-SL | ff-Adlm-SL   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤅𞤢𞤪𞤢𞤤𞤮𞤲                                 |
-| ff-Adlm-SN | ff-Adlm-SN   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤅𞤫𞤲𞤫𞤺𞤢𞥄𞤤                                |
+| ff-Adlm-SN | ff-Adlm-SN   | 𞤆𞤵𞤤𞤢𞤪, 𞤀𞤁𞤂𞤢𞤃, 𞤅𞤫𞤲𞤫𞤺𞤢𞥄𞤤                                 |
 | ff-Latn    | ff-Latn-SN   | Pulaar, Latn, Senegaal                                |
 | ff-Latn-BF | ff-Latn-BF   | Pulaar, Latn, Burkibaa Faaso                          |
 | ff-Latn-CM | ff-Latn-CM   | Pulaar, Latn, Kameruun                                |
@@ -372,7 +372,7 @@ Here is the complete table.
 | gsw        | gsw-Latn-CH  | Schwiizertüütsch, Latiinisch, Schwiiz                 |
 | gsw-FR     | gsw-Latn-FR  | Schwiizertüütsch, Latiinisch, Frankriich              |
 | gsw-LI     | gsw-Latn-LI  | Schwiizertüütsch, Latiinisch, Liächteschtäi           |
-| gu         | gu-Gujr-IN   | ગુજરાતી, ગુજરાતી, ભારત                                |
+| gu         | gu-Gujr-IN   | ગુજરાતી, ગુજરાતી, ભારત                                       |
 | guz        | guz-Latn-KE  | Ekegusii, Latn, Kenya                                 |
 | gv         | gv-Latn-IM   | Gaelg, Latn, Ellan Vannin                             |
 | ha         | ha-Latn-NG   | Hausa, Latin, Nijeriya                                |
@@ -380,7 +380,7 @@ Here is the complete table.
 | ha-NE      | ha-Latn-NE   | Hausa, Latin, Nijar                                   |
 | haw        | haw-Latn-US  | ʻŌlelo Hawaiʻi, Latn, ʻAmelika Hui Pū ʻIa             |
 | he         | he-Hebr-IL   | עברית, עברי, ישראל                                    |
-| hi         | hi-Deva-IN   | हिन्दी, देवनागरी, भारत                                |
+| hi         | hi-Deva-IN   | हिन्दी, देवनागरी, भारत                                       |
 | hi-Latn    | hi-Latn-IN   | Hindi (Latin), India                                  |
 | hr         | hr-Latn-HR   | hrvatski, latinica, Hrvatska                          |
 | hr-BA      | hr-Latn-BA   | hrvatski, latinica, Bosna i Hercegovina               |
@@ -390,7 +390,7 @@ Here is the complete table.
 | ia         | ia-Latn-001  | interlingua, latin, Mundo                             |
 | id         | id-Latn-ID   | Indonesia, Latin, Indonesia                           |
 | ig         | ig-Latn-NG   | Igbo, Latin, Naịjịrịa                                 |
-| ii         | ii-Yiii-CN   | ꆈꌠꉙ, ꆈꌠꁱꂷ, ꍏꇩ                                |
+| ii         | ii-Yiii-CN   | ꆈꌠꉙ, ꆈꌠꁱꂷ, ꍏꇩ                                         |
 | is         | is-Latn-IS   | íslenska, latneskt, Ísland                            |
 | it         | it-Latn-IT   | italiano, latino, Italia                              |
 | it-CH      | it-Latn-CH   | italiano, latino, Svizzera                            |
@@ -412,14 +412,14 @@ Here is the complete table.
 | kkj        | kkj-Latn-CM  | kakɔ, Latn, Kamɛrun                                   |
 | kl         | kl-Latn-GL   | kalaallisut, Latn, Kalaallit Nunaat                   |
 | kln        | kln-Latn-KE  | Kalenjin, Latn, Emetab Kenya                          |
-| km         | km-Khmr-KH   | ខ្មែរ, ខ្មែរ, កម្ពុជា                                 |
-| kn         | kn-Knda-IN   | ಕನ್ನಡ, ಕನ್ನಡ, ಭಾರತ                                    |
+| km         | km-Khmr-KH   | ខ្មែរ, ខ្មែរ, កម្ពុជា                                        |
+| kn         | kn-Knda-IN   | ಕನ್ನಡ, ಕನ್ನಡ, ಭಾರತ                                       |
 | ko         | ko-Kore-KR   | 한국어, 한국 문자, 대한민국                           |
 | ko-KP      | ko-Kore-KP   | 한국어, 한국 문자, 조선민주주의인민공화국             |
-| kok        | kok-Deva-IN  | कोंकणी, देवनागरी, भारत                                |
-| ks         | ks-Arab-IN   | کٲشُر, عربی, ہِندوستان                                |
-| ks-Arab    | ks-Arab-IN   | کٲشُر, عربی, ہِندوستان                                |
-| ks-Deva    | ks-Deva-IN   | कॉशुर, देवनागरी, हिंदोस्तान                           |
+| kok        | kok-Deva-IN  | कोंकणी, देवनागरी, भारत                                       |
+| ks         | ks-Arab-IN   | کٲشُر, عربی, ہِندوستان                                  |
+| ks-Arab    | ks-Arab-IN   | کٲشُر, عربی, ہِندوستان                                  |
+| ks-Deva    | ks-Deva-IN   | कॉशुर, देवनागरी, हिंदोस्तान                                     |
 | ksb        | ksb-Latn-TZ  | Kishambaa, Latn, Tanzania                             |
 | ksf        | ksf-Latn-CM  | rikpa, Latn, kamɛrún                                  |
 | ksh        | ksh-Latn-DE  | Kölsch, lateinesche Schreff, Doütschland              |
@@ -442,7 +442,7 @@ Here is the complete table.
 | luo        | luo-Latn-KE  | Dholuo, Latn, Kenya                                   |
 | luy        | luy-Latn-KE  | Luluhia, Latn, Kenya                                  |
 | lv         | lv-Latn-LV   | latviešu, latīņu, Latvija                             |
-| mai        | mai-Deva-IN  | मैथिली, देवनागरी, भारत                                |
+| mai        | mai-Deva-IN  | मैथिली, देवनागरी, भारत                                       |
 | mas        | mas-Latn-KE  | Maa, Latn, Kenya                                      |
 | mas-TZ     | mas-Latn-TZ  | Maa, Latn, Tansania                                   |
 | mdf        | mdf-Cyrl-RU  | мокшень кяль, Cyrl, RU                                |
@@ -453,18 +453,18 @@ Here is the complete table.
 | mgo        | mgo-Latn-CM  | metaʼ, ngam ŋwaʼri, Kamalun                           |
 | mi         | mi-Latn-NZ   | Māori, Rātina, Aotearoa                               |
 | mk         | mk-Cyrl-MK   | македонски, кирилско писмо, Северна Македонија        |
-| ml         | ml-Mlym-IN   | മലയാളം, മലയാളം, ഇന്ത്യ                                |
+| ml         | ml-Mlym-IN   | മലയാളം, മലയാളം, ഇന്ത്യ                                      |
 | mn         | mn-Cyrl-MN   | монгол, кирилл, Монгол                                |
-| mni        | mni-Beng-IN  | মৈতৈলোন্, বাংলা, ইন্দিয়া                             |
-| mni-Beng   | mni-Beng-IN  | মৈতৈলোন্, বাংলা, ইন্দিয়া                             |
-| mr         | mr-Deva-IN   | मराठी, देवनागरी, भारत                                 |
+| mni        | mni-Beng-IN  | মৈতৈলোন্, বাংলা, ইন্দিয়া                                        |
+| mni-Beng   | mni-Beng-IN  | মৈতৈলোন্, বাংলা, ইন্দিয়া                                        |
+| mr         | mr-Deva-IN   | मराठी, देवनागरी, भारत                                       |
 | ms         | ms-Latn-MY   | Melayu, Latin, Malaysia                               |
 | ms-BN      | ms-Latn-BN   | Melayu, Latin, Brunei                                 |
 | ms-ID      | ms-Latn-ID   | Melayu, Latin, Indonesia                              |
 | ms-SG      | ms-Latn-SG   | Melayu, Latin, Singapura                              |
 | mt         | mt-Latn-MT   | Malti, Latin, Malta                                   |
 | mua        | mua-Latn-CM  | MUNDAŊ, Latn, kameruŋ                                 |
-| my         | my-Mymr-MM   | မြန်မာ, မြန်မာ, မြန်မာ                                |
+| my         | my-Mymr-MM   | မြန်မာ, မြန်မာ, မြန်မာ                                      |
 | mzn        | mzn-Arab-IR  | مازرونی, عربی, ایران                                  |
 | naq        | naq-Latn-NA  | Khoekhoegowab, Latn, Namibiab                         |
 | nb         | nb-Latn-NO   | norsk bokmål, latinsk, Norge                          |
@@ -472,8 +472,8 @@ Here is the complete table.
 | nd         | nd-Latn-ZW   | isiNdebele, Latn, Zimbabwe                            |
 | nds        | nds-Latn-DE  | nds, Latn, DE                                         |
 | nds-NL     | nds-Latn-NL  | nds, Latn, NL                                         |
-| ne         | ne-Deva-NP   | नेपाली, देवानागरी, नेपाल                              |
-| ne-IN      | ne-Deva-IN   | नेपाली, देवानागरी, भारत                               |
+| ne         | ne-Deva-NP   | नेपाली, देवानागरी, नेपाल                                       |
+| ne-IN      | ne-Deva-IN   | नेपाली, देवानागरी, भारत                                       |
 | nl         | nl-Latn-NL   | Nederlands, Latijns, Nederland                        |
 | nl-AW      | nl-Latn-AW   | Nederlands, Latijns, Aruba                            |
 | nl-BE      | nl-Latn-BE   | Nederlands, Latijns, België                           |
@@ -491,12 +491,12 @@ Here is the complete table.
 | oc-ES      | oc-Latn-ES   | oc, Latn, ES                                          |
 | om         | om-Latn-ET   | Oromoo, Latin, Itoophiyaa                             |
 | om-KE      | om-Latn-KE   | Oromoo, Latin, Keeniyaa                               |
-| or         | or-Orya-IN   | ଓଡ଼ିଆ, ଓଡ଼ିଆ, ଭାରତ                                    |
+| or         | or-Orya-IN   | ଓଡ଼ିଆ, ଓଡ଼ିଆ, ଭାରତ                                         |
 | os         | os-Cyrl-GE   | ирон, Киррилицӕ, Гуырдзыстон                          |
 | os-RU      | os-Cyrl-RU   | ирон, Киррилицӕ, Уӕрӕсе                               |
-| pa         | pa-Guru-IN   | ਪੰਜਾਬੀ, ਗੁਰਮੁਖੀ, ਭਾਰਤ                                 |
+| pa         | pa-Guru-IN   | ਪੰਜਾਬੀ, ਗੁਰਮੁਖੀ, ਭਾਰਤ                                        |
 | pa-Arab    | pa-Arab-PK   | پنجابی, عربی, پاکستان                                 |
-| pa-Guru    | pa-Guru-IN   | ਪੰਜਾਬੀ, ਗੁਰਮੁਖੀ, ਭਾਰਤ                                 |
+| pa-Guru    | pa-Guru-IN   | ਪੰਜਾਬੀ, ਗੁਰਮੁਖੀ, ਭਾਰਤ                                        |
 | pcm        | pcm-Latn-NG  | Naijíriá Píjin, Látin, Naijíria                       |
 | pis        | pis-Latn-SB  | Pijin, Latin, Solomon Aelan                           |
 | pl         | pl-Latn-PL   | polski, łacińskie, Polska                             |
@@ -517,7 +517,7 @@ Here is the complete table.
 | qu         | qu-Latn-PE   | Runasimi, Latin Simi, Perú                            |
 | qu-BO      | qu-Latn-BO   | Runasimi, Latin Simi, Bolivia                         |
 | qu-EC      | qu-Latn-EC   | Runasimi, Latin Simi, Ecuador                         |
-| raj        | raj-Deva-IN  | राजस्थानी, देवनागरी, भारत                             |
+| raj        | raj-Deva-IN  | राजस्थानी, देवनागरी, भारत                                     |
 | rm         | rm-Latn-CH   | rumantsch, latin, Svizra                              |
 | rn         | rn-Latn-BI   | Ikirundi, Latn, Uburundi                              |
 | ro         | ro-Latn-RO   | română, latină, România                               |
@@ -531,7 +531,7 @@ Here is the complete table.
 | ru-UA      | ru-Cyrl-UA   | русский, кириллица, Украина                           |
 | rw         | rw-Latn-RW   | Kinyarwanda, Latn, U Rwanda                           |
 | rwk        | rwk-Latn-TZ  | Kiruwa, Latn, Tanzania                                |
-| sa         | sa-Deva-IN   | संस्कृत भाषा, Deva, भारतः                             |
+| sa         | sa-Deva-IN   | संस्कृत भाषा, Deva, भारतः                                    |
 | sah        | sah-Cyrl-RU  | саха тыла, Нууччалыы, Арассыыйа                       |
 | saq        | saq-Latn-KE  | Kisampur, Latn, Kenya                                 |
 | sat        | sat-Olck-IN  | ᱥᱟᱱᱛᱟᱲᱤ, ᱚᱞ ᱪᱤᱠᱤ, ᱤᱱᱰᱤᱭᱟ                              |
@@ -540,7 +540,7 @@ Here is the complete table.
 | sc         | sc-Latn-IT   | sardu, latinu, Itàlia                                 |
 | sd         | sd-Arab-PK   | سنڌي, عربي, پاڪستان                                   |
 | sd-Arab    | sd-Arab-PK   | سنڌي, عربي, پاڪستان                                   |
-| sd-Deva    | sd-Deva-IN   | सिन्धी, देवनागिरी, भारत                               |
+| sd-Deva    | sd-Deva-IN   | सिन्धी, देवनागिरी, भारत                                       |
 | se         | se-Latn-NO   | davvisámegiella, láhtenaš, Norga                      |
 | se-FI      | se-Latn-FI   | davvisámegiella, láhtenaš, Suopma                     |
 | se-SE      | se-Latn-SE   | davvisámegiella, láhtenaš, Ruoŧŧa                     |
@@ -550,7 +550,7 @@ Here is the complete table.
 | shi        | shi-Tfng-MA  | ⵜⴰⵛⵍⵃⵉⵜ, Tfng, ⵍⵎⵖⵔⵉⴱ                                 |
 | shi-Latn   | shi-Latn-MA  | Tashelḥiyt, Latn, lmɣrib                              |
 | shi-Tfng   | shi-Tfng-MA  | ⵜⴰⵛⵍⵃⵉⵜ, Tfng, ⵍⵎⵖⵔⵉⴱ                                 |
-| si         | si-Sinh-LK   | සිංහල, සිංහල, ශ්‍රී ලංකාව                             |
+| si         | si-Sinh-LK   | සිංහල, සිංහල, ශ්‍රී ලංකාව                                      |
 | sk         | sk-Latn-SK   | slovenčina, latinka, Slovensko                        |
 | sl         | sl-Latn-SI   | slovenščina, latinica, Slovenija                      |
 | smn        | smn-Latn-FI  | anarâškielâ, Latn, Suomâ                              |
@@ -581,11 +581,11 @@ Here is the complete table.
 | sw-CD      | sw-Latn-CD   | Kiswahili, Kilatini, Jamhuri ya Kidemokrasia ya Kongo |
 | sw-KE      | sw-Latn-KE   | Kiswahili, Kilatini, Kenya                            |
 | sw-UG      | sw-Latn-UG   | Kiswahili, Kilatini, Uganda                           |
-| ta         | ta-Taml-IN   | தமிழ், தமிழ், இந்தியா                                 |
-| ta-LK      | ta-Taml-LK   | தமிழ், தமிழ், இலங்கை                                  |
-| ta-MY      | ta-Taml-MY   | தமிழ், தமிழ், மலேசியா                                 |
-| ta-SG      | ta-Taml-SG   | தமிழ், தமிழ், சிங்கப்பூர்                             |
-| te         | te-Telu-IN   | తెలుగు, తెలుగు, భారతదేశం                              |
+| ta         | ta-Taml-IN   | தமிழ், தமிழ், இந்தியா                                        |
+| ta-LK      | ta-Taml-LK   | தமிழ், தமிழ், இலங்கை                                        |
+| ta-MY      | ta-Taml-MY   | தமிழ், தமிழ், மலேசியா                                        |
+| ta-SG      | ta-Taml-SG   | தமிழ், தமிழ், சிங்கப்பூர்                                      |
+| te         | te-Telu-IN   | తెలుగు, తెలుగు, భారతదేశం                                       |
 | teo        | teo-Latn-UG  | Kiteso, Latn, Uganda                                  |
 | teo-KE     | teo-Latn-KE  | Kiteso, Latn, Kenia                                   |
 | tg         | tg-Cyrl-TJ   | тоҷикӣ, Кириллӣ, Тоҷикистон                           |
@@ -602,7 +602,7 @@ Here is the complete table.
 | tzm        | tzm-Latn-MA  | Tamaziɣt n laṭlaṣ, Latn, Meṛṛuk                       |
 | ug         | ug-Arab-CN   | ئۇيغۇرچە, ئەرەب, جۇڭگو                                |
 | uk         | uk-Cyrl-UA   | українська, кирилиця, Україна                         |
-| und        | und-Latn-US  | und, Latn, US                                         |
+| und        | und-Latn-US  | undefined -> English                                  |
 | ur         | ur-Arab-PK   | اردو, عربی, پاکستان                                   |
 | ur-IN      | ur-Arab-IN   | اردو, عربی, بھارت                                     |
 | uz         | uz-Latn-UZ   | o‘zbek, lotin, Oʻzbekiston                            |
@@ -619,7 +619,7 @@ Here is the complete table.
 | xh         | xh-Latn-ZA   | IsiXhosa, IsiLatin, EMzantsi Afrika                   |
 | xog        | xog-Latn-UG  | Olusoga, Latn, Yuganda                                |
 | yav        | yav-Latn-CM  | nuasue, Latn, Kemelún                                 |
-| yi         | yi-Hebr-001  | ייִדיש, העברעיש, וועלט                                |
+| yi         | yi-Hebr-001  | ייִדיש, העברעיש, וועלט                                 |
 | yo         | yo-Latn-NG   | Èdè Yorùbá, Èdè Látìn, Nàìjíríà                       |
 | yo-BJ      | yo-Latn-BJ   | Èdè Yorùbá, Èdè Látìn, Bɛ̀nɛ̀                           |
 | yrl        | yrl-Latn-BR  | nheẽgatu, ratĩ, Brasiu                                |
@@ -633,7 +633,7 @@ Here is the complete table.
 | zh-Hans    | zh-Hans-CN   | 简体中文, 中国                                        |
 | zh-Hans-HK | zh-Hans-HK   | 简体中文, 中国香港特别行政区                          |
 | zh-Hans-MO | zh-Hans-MO   | 简体中文, 中国澳门特别行政区                          |
-| zh-Hans-SG | zh-Hans-SG   | 简体中文, 新加坡                                      |
+| zh-Hans-SG | zh-Hans-SG   | 华文, 新加坡                                          |
 | zh-Hant    | zh-Hant-TW   | 正體中文, 中國台灣                                    |
 | zh-Hant-HK | zh-Hant-HK   | 繁體中文, 中國香港                                    |
 | zh-Hant-MO | zh-Hant-MO   | 繁體中文, 中國澳門                                    |
@@ -646,4 +646,3 @@ Here is the complete table.
 | ht         | ht-Latn-HT   |                                                       |
 | co         | co-Latn-FR   |                                                       |
 | tl         | tl-Latn-PH   |                                                       |
-| iw         | iw-Hebr-IL   |                                                       |
