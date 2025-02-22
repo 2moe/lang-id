@@ -32,6 +32,7 @@ flamegraph.svg
 
 # white list
 !/src
+!/.cargo
 !/Cargo.toml
 !/Cargo.lock
 !/License
