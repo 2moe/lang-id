@@ -3,7 +3,7 @@ use std::io;
 use tap::Pipe;
 
 mod utils;
-use crate::utils::run_os_cmd;
+use crate::utils::{BoolExt, run_os_cmd};
 
 #[test]
 #[ignore]
@@ -15,6 +15,5 @@ fn fmt() -> io::Result<()> {
   "#
   .pipe(run_os_cmd)?
   .success()
-  .then_some(())
   .ok_or_else(err)
 }
