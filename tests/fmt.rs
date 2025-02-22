@@ -1,17 +1,33 @@
-use std::{io, process::Command};
+use std::{
+  io,
+  process::{Command, ExitStatus},
+};
 
-use itertools::Itertools;
+use tap::Pipe;
 
 #[test]
 #[ignore]
 fn fmt() -> io::Result<()> {
-  let cmd = "cargo +nightly fmt"
-    .split_ascii_whitespace()
-    .collect_vec();
+  r#"
+    cargo +nightly fmt
+  "#
+  .pipe(run_os_cmd)
+  .map(|e| {
+    if !e.success() {
+      panic!("Failed to run os command, {e}")
+    }
+  })
+}
 
-  Command::new(cmd[0])
-    .args(&cmd[1..])
-    .status()?;
-
-  Ok(())
+fn run_os_cmd(raw: &str) -> io::Result<ExitStatus> {
+  raw
+    .trim_ascii()
+    .pipe(shlex::Shlex::new)
+    .pipe_ref_mut(|it| {
+      it.next()
+        .expect("Invalid command")
+        .pipe(Command::new)
+        .args(it)
+        .status()
+    })
 }

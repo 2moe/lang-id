@@ -29,16 +29,16 @@ fn build_rsdoc(pkg: &str) -> ExitResult {
   let err = || "Invalid cargo rustdoc command".pipe(io::Error::other);
 
   format!(
-    "
+    r#"
     cargo +nightly
     rustdoc
-    -p {pkg}
+    -p  {pkg}
     --all-features
     --open
     --
     --cfg  __unstable_doc
     --document-private-items
-  "
+  "#
   )
   .trim_ascii()
   .lines()
