@@ -16,9 +16,7 @@ fn build_and_open_rust_doc() -> io::Result<()> {
     .pipe(build_rsdoc)?
     .success()
     .then_some(())
-    .ok_or_else(err)?;
-
-  Ok(())
+    .ok_or_else(err)
 }
 fn build_rsdoc<T: Display>(pkg: T) -> io::Result<ExitStatus> {
   format!(
