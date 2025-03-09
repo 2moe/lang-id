@@ -1,52 +1,50 @@
-// cargo +nightly rustdoc --all-features -- --cfg __unstable_doc
-// --document-private-items; open $CARGO_TARGET_DIR/doc/lang_id/index.html
 #![cfg_attr(__unstable_doc, feature(doc_auto_cfg, doc_notable_trait))]
-#![no_std]
+#![cfg_attr(not(feature = "std"), no_std)]
 
-//! This library provides a series of const lang-ids which can be found in the
-//! `consts` module. Additionally, it provides some handy maps.
-//!
-//! # Examples
-//!
-//! Using the result of a const fn as a value:
-//!
-//! ```
-//! use lang_id::LangID;
-//!
-//! const DEFAULT_LANG: LangID = unsafe { lang_id::consts::get_en() };
-//! ```
-//!
-//! Maximize:
-//!
-//! Note: Finding Maximized by `max::map()` does not enumerate all cases.
-//!
-//! ```
-//! let map = lang_id::maps::max::map();
-//! let zh = &map["zh"];
-//! assert_eq!(zh.language, "zh");
-//! assert_eq!(zh.script, "Hans");
-//! assert_eq!(zh.region, "CN");
-//! ```
-//!
-//! Minimize:
-//!
-//! ```
-//! let map = lang_id::maps::min::map();
-//!
-//! let sg = map.get("zh-Hans-SG");
-//! assert_eq!(sg, Some(&"zh-SG"));
-//! ```
-//!
-//! Get description of a language:
-//!
-//! ```
-//! let map = lang_id::maps::description::map();
-//! let gsw_fr = map.get("gsw-FR");
-//! assert_eq!(gsw_fr, Some(&"Schwiizertüütsch, Latiinisch, Frankriich"));
-//!
-//! let ja = map.get("ja");
-//! assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
-//! ```
+/*!
+This library provides a series of const lang-ids (language identifiers) which can be found in the
+`consts` module. Additionally, it provides some handy maps.
+
+## Examples
+
+Using the result of a const fn as a value:
+
+```
+use lang_id::LangID;
+
+// Compile-time verified language ID
+const DEFAULT_LANG: LangID = lang_id::consts::get_en();
+```
+
+Description-data Lookup (requires map feature)
+
+```
+# #[cfg(feature = "map")]
+# {
+let map = lang_id::maps::description::map();
+let gsw_fr = map.get("gsw-FR");
+assert_eq!(gsw_fr, Some(&"Schwiizertüütsch, Latiinisch, Frankriich"));
+
+let zh = map.get("zh");
+assert_eq!(zh, Some(&"简体中文, 中国"));
+
+let ja = map.get("ja");
+assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
+# }
+```
+
+## Features
+
+| Feature        | Dependencies          | Description                                                                                                          |
+| -------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **std**        | None                  | Enables stdlib integrations                                                                                          |
+| **map**        | `phf`, `tinystr`      | Adds precomputed static maps:<br>- Perfect hash maps for O(1) lookups<br>- Compact string storage with TinyStr |
+| **sys-locale** | `sys-locale`, **std** | System locale detection:<br>- Cross-platform locale querying<br>- Integration with OS settings                       |
+| **match**      | None                  | Match the value or function name in consts using bytes, for example, b"en-001" => get_en_001().                      |
+| **serde**      | `unic-langid/serde`   | Serialization/deserialization support                                                                                |
+
+*/
+
 pub mod consts;
 mod id;
 pub use unic_langid::LanguageIdentifier as LangID;
@@ -67,18 +65,9 @@ pub mod matches;
 pub mod sys_locale;
 
 #[cfg(feature = "std")]
-extern crate std;
-
-// #[cfg(feature = "alloc")]
-// extern crate alloc;
-
-#[cfg(feature = "std")]
 #[cfg(test)]
 mod tests {
-  use std::{borrow::ToOwned, boxed::Box, dbg, println};
-
   use super::*;
-  use crate::matches::match_id;
 
   // #[test]
   // #[cfg(feature = "map")]
@@ -105,21 +94,7 @@ mod tests {
 
   #[test]
   fn test_get_en() {
-    let default_lang = unsafe { crate::consts::get_en() };
+    let default_lang = crate::consts::get_en();
     dbg!(default_lang.language);
   }
-}
-
-// #[ignore]
-#[cfg(test)]
-#[cfg(feature = "std")]
-/// ## Example
-///
-/// ```no_run
-/// simple_benchmark(|| { /* do sth. */ })
-/// ```
-pub(crate) fn simple_benchmark<U, F: FnOnce() -> U>(f: F) {
-  let start = std::time::Instant::now();
-  f();
-  std::eprintln!("Time taken: {:?}", start.elapsed());
 }

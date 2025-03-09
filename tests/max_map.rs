@@ -1,6 +1,8 @@
 mod builder;
 use std::io;
 
+use crate::builder::map_type::MapType;
+
 #[test]
 #[ignore]
 fn new_map() -> io::Result<()> {
@@ -616,7 +618,7 @@ arguments: `language`, `script`, and `region`. These arguments represent the
 ISO 639-1 language code, ISO 15924 script code, and ISO 3166-1 alpha-2
 region code for the language respectively.
 
-## Example
+## Examples
 
 ```
 let map = lang_id::maps::max::map();
@@ -624,6 +626,14 @@ let de = &map["de"];
 assert_eq!(de.language, "de");
 assert_eq!(de.script, "Latn");
 assert_eq!(de.region, "DE");
+```
+
+```
+let map = lang_id::maps::max::map();
+let zh = &map["zh"];
+assert_eq!(zh.language, "zh");
+assert_eq!(zh.script, "Hans");
+assert_eq!(zh.region, "CN");
 ```
   "###;
 
@@ -634,7 +644,7 @@ assert_eq!(de.region, "DE");
     raw_doc,
     mod_name,
     kv,
-    map_type: Some("PhfTinyidMap"),
+    map_type: MapType::TinyID,
     ..Default::default()
   }
   .build()

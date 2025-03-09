@@ -1,12 +1,9 @@
 # Lang-ID
 
-[![crates.io](https://img.shields.io/crates/v/lang-id.svg)](https://crates.io/crates/lang-id)
+[![crates.io](https://img.shields.io/crates/v/lang-id.svg)](https://crates.io/crates/lang-id)    [![Documentation](https://docs.rs/lang-id/badge.svg)](https://docs.rs/lang-id)
+[![MIT/Apache-2 licensed](https://img.shields.io/crates/l/lang-id.svg)](../LICENSE-APACHE)
 
-[![Documentation](https://docs.rs/lang-id/badge.svg)](https://docs.rs/lang-id)
-
-[![MIT/Apache-2 licensed](https://img.shields.io/crates/l/lang-id.svg)](./LICENSE-APACHE)
-
-This library provides a series of const lang-ids which can be found in the `consts` module.
+This library provides a series of const lang-ids (language identifiers) which can be found in the `consts` module.
 Additionally, it provides some handy maps.
 
 ---
@@ -18,41 +15,26 @@ Using the result of a const fn as a value:
 ```rust
 use lang_id::LangID;
 
-const DEFAULT_LANG: LangID = unsafe { lang_id::consts::get_en() };
+const DEFAULT_LANG: LangID = lang_id::consts::get_en();
 ```
 
-Maximize:
-
-Note: Finding Maximized by `max::map()` does not enumerate all cases.
-
-```rust
-let map = lang_id::maps::max::map();
-let zh = &map["zh"];
-assert_eq!(zh.language, "zh");
-assert_eq!(zh.script, "Hans");
-assert_eq!(zh.region, "CN");
-```
-
-Minimize:
-
-```rust
-let map = lang_id::maps::min::map();
-
-let sg = map.get("zh-Hans-SG");
-assert_eq!(sg, Some(&"zh-SG"));
-```
-
-Get description of a language:
+Description-data Lookup (requires map feature)
 
 ```rust
 let map = lang_id::maps::description::map();
+let gsw_fr = map.get("gsw-FR");
+assert_eq!(gsw_fr, Some(&"Schwiizertüütsch, Latiinisch, Frankriich"));
+
+let zh = map.get("zh");
+assert_eq!(zh, Some(&"简体中文, 中国"));
+
 let ja = map.get("ja");
 assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 ```
 
 ## Table
 
-| LangID     | Maximized    | Description                                           |
+| ID         | Maximized    | Description                                           |
 | ---------- | ------------ | ----------------------------------------------------- |
 | af         | af-Latn-ZA   | Afrikaans, Latyn, Suid-Afrika                         |
 | af-NA      | af-Latn-NA   | Afrikaans, Latyn, Namibië                             |

@@ -12,6 +12,8 @@ use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 use tap::{Pipe, Tap};
 
+use crate::builder::map_type::MapType;
+
 type AnyResult<T> = anyhow::Result<T>;
 
 #[test]
@@ -379,7 +381,8 @@ assert_eq!(map.get("GB"), Some(&"United Kingdom"));
     raw_doc,
     mod_name: "en_001_territory_ids",
     str_kv: &vec,
-    map_type: Some("PhfOrderedMap"),
+    // map_type: Some("PhfOrderedMap"),
+    map_type: MapType::Ordered,
     ..Default::default()
   }
   .build()
@@ -408,7 +411,7 @@ assert_eq!(map.get("United Kingdom"), Some(&"GB"));
     mod_name: "en_001_territory_names",
     raw_doc,
     str_kv: &vec,
-    map_type: Some("PhfOrderedMap"),
+    map_type: MapType::Ordered,
     ..Default::default()
   }
   .build()

@@ -46,7 +46,7 @@ impl<T: Debug> MapBuilder<'_, T> {
     self
       .kv
       .iter()
-      .fold(new_phf_map!(Map), |map, (key, tuple)| {
+      .fold(new_phf_map!(OrderedMap), |map, (key, tuple)| {
         format!("const {{ TinyID::new{tuple:?} }}") //
           .pipe_ref(|v| map.entry(key, v));
         map

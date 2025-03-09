@@ -14,7 +14,7 @@ fn get_env_lang_or_en() -> LangID {
 }
 
 fn unwrap_or_en(id: Option<LangID>) -> LangID {
-  id.unwrap_or_else(|| unsafe { get_en() })
+  id.unwrap_or_else(get_en)
 }
 
 /// - env_name: None.unwrap_or("LANG")
@@ -108,8 +108,9 @@ fn parse_to_opt_langid(s: &str) -> Option<LangID> {
 mod tests {
   use std::dbg;
 
+  use testutils::simple_benchmark;
+
   use super::*;
-  use crate::simple_benchmark;
 
   #[test]
   #[ignore]
@@ -135,7 +136,7 @@ mod tests {
 
   #[test]
   fn test_min_langid() {
-    let mut id = unsafe { crate::consts::get_en_gb() };
+    let mut id = crate::consts::get_en_gb();
     id.maximize();
     id.minimize();
 
@@ -147,7 +148,7 @@ mod tests {
 
   #[test]
   fn test_max_langid() {
-    let mut id = unsafe { crate::consts::get_de() };
+    let mut id = crate::consts::get_de();
     id.maximize();
     assert_eq!(id.language, "de");
     if let Some(r) = id.region {

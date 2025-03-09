@@ -1,6 +1,8 @@
 mod builder;
 use std::io;
 
+use crate::builder::map_type::MapType;
+
 #[test]
 #[ignore]
 fn new_map() -> io::Result<()> {
@@ -622,13 +624,14 @@ assert_eq!(map["en-001"], "English, Latin, world");
   builder::MapBuilder::<()> {
     mod_name,
     raw_doc,
-    map_type: Some("PhfMap"),
+    map_type: MapType::Ordered,
     str_kv,
     ..Default::default()
   }
   .build()
 }
 
+#[cfg(feature = "map")]
 #[test]
 fn test_español_desc() {
   let desc = lang_id::maps::description::map();

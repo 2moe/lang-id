@@ -22,22 +22,27 @@ impl ID {
     }
   }
 
-  #[allow(clippy::missing_safety_doc)]
-  #[allow(unsafe_op_in_unsafe_fn)]
-  pub(crate) const unsafe fn get_id(self) -> LangID {
-    let language = subtags::Language::from_raw_unchecked(self.language);
+  /// Warn: This function is unsafe.
+  ///
+  /// Since `Option<T>.map(|x| y)` cannot be used in **const fn** in rust 1.85,
+  /// use match expressions instead.
+  #[inline]
+  pub(crate) const fn get_id(self) -> LangID {
+    unsafe {
+      let language = subtags::Language::from_raw_unchecked(self.language);
 
-    // self.script.map(subtags::Script::from_raw_unchecked)
-    let script = match self.script {
-      Some(s) => Some(subtags::Script::from_raw_unchecked(s)),
-      _ => None,
-    };
+      // self.script.map(subtags::Script::from_raw_unchecked)
+      let script = match self.script {
+        Some(s) => Some(subtags::Script::from_raw_unchecked(s)),
+        _ => None,
+      };
 
-    let region = match self.region {
-      Some(r) => Some(subtags::Region::from_raw_unchecked(r)),
-      _ => None,
-    };
+      let region = match self.region {
+        Some(r) => Some(subtags::Region::from_raw_unchecked(r)),
+        _ => None,
+      };
 
-    LangID::from_raw_parts_unchecked(language, script, region, None)
+      LangID::from_raw_parts_unchecked(language, script, region, None)
+    }
   }
 }

@@ -11,8 +11,8 @@ pub mod en_001_territory_ids;
 pub mod en_001_territory_names;
 
 pub use phf;
-type PhfMap<'a> = phf::Map<&'a str, &'a str>;
-type PhfTinyidMap<'a> = phf::Map<&'a str, TinyID>;
+// type PhfMap<'a> = phf::Map<&'a str, &'a str>;
+type PhfTinyidMap<'a> = phf::OrderedMap<&'a str, TinyID>;
 type PhfOrderedMap<'a> = phf::OrderedMap<&'a str, &'a str>;
 // type PhfLangidMap<'a> = phf::Map<&'static str, crate::LangID>;
 

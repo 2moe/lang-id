@@ -1,6 +1,8 @@
 mod builder;
 use std::io;
 
+use crate::builder::map_type::MapType;
+
 #[test]
 #[ignore]
 fn new_map() -> io::Result<()> {
@@ -582,20 +584,36 @@ fn new_map() -> io::Result<()> {
     ("yue-Hant", "yue"),
     ("zgh", "zgh"),
     ("zh", "zh"),
+    ("zh-CN", "zh"),
     ("zh-Hans", "zh"),
+    ("zh-Hans-CN", "zh"),
     ("zh-Hans-HK", "zh-Hans-HK"),
     ("zh-Hans-MO", "zh-Hans-MO"),
     ("zh-Hans-SG", "zh-SG"),
     ("zh-Hant", "zh-TW"),
     ("zh-Hant-HK", "zh-HK"),
     ("zh-Hant-MO", "zh-MO"),
+    ("zh-Hant-TW", "zh-TW"),
     ("zu", "zu"),
   ];
 
+  let raw_doc = r#"
+Generates a const perfect hash map for minimized language tag canonicalization.
+
+## Example
+
+```
+let map = lang_id::maps::min::map();
+
+let sg = map.get("zh-Hans-SG");
+assert_eq!(sg, Some(&"zh-SG"));
+```
+  "#;
   builder::MapBuilder::<()> {
     mod_name,
     str_kv,
-    map_type: Some("PhfMap"),
+    map_type: MapType::Ordered,
+    raw_doc,
     ..Default::default()
   }
   .build()
