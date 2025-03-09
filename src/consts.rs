@@ -1,6 +1,3 @@
-#![allow(clippy::missing_safety_doc)]
-#![allow(unsafe_op_in_unsafe_fn)]
-
 use crate::{LangID, id::ID};
 
 /// af: (af-Latn-ZA) Afrikaans, Latyn, Suid-Afrika
