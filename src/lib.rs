@@ -40,7 +40,7 @@ assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 | **std**        | None                  | Enables stdlib integrations                                                                                          |
 | **map**        | `phf`, `tinystr`      | Adds precomputed static maps:<br>- Perfect hash maps for O(1) lookups<br>- Compact string storage with TinyStr |
 | **sys-locale** | `sys-locale`, **std** | System locale detection:<br>- Cross-platform locale querying<br>- Integration with OS settings                       |
-| **match**      | None                  | Match the value or function name in consts using bytes, for example, b"en-001" => get_en_001().                      |
+| **match**      | None                  | Match the value or function name in consts using bytes, for example, b"en-001" => lang_id_en_001().                      |
 | **serde**      | `unic-langid/serde`   | Serialization/deserialization support                                                                                |
 
 */

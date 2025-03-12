@@ -15,7 +15,7 @@ Using the result of a const fn as a value:
 ```rust
 use lang_id::LangID;
 
-const DEFAULT_LANG: LangID = lang_id::consts::get_en();
+const DEFAULT_LANG: LangID = lang_id::consts::lang_id_en();
 ```
 
 Description-data Lookup (requires map feature)
