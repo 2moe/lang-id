@@ -3,7 +3,7 @@ use std::env;
 pub use sys_locale::{get_locale as fetch, get_locales as fetch_locales};
 use tap::Pipe;
 
-use crate::{LangID, consts::get_en};
+use crate::{LangID, consts::lang_id_en};
 
 /// - env::var("LANG")
 ///   - "C.UTF-8" -> "C" -> parse_to_opt_langid || "en"
@@ -14,7 +14,7 @@ fn get_env_lang_or_en() -> LangID {
 }
 
 fn unwrap_or_en(id: Option<LangID>) -> LangID {
-  id.unwrap_or_else(get_en)
+  id.unwrap_or_else(lang_id_en)
 }
 
 /// - env_name: None.unwrap_or("LANG")
@@ -136,7 +136,7 @@ mod tests {
 
   #[test]
   fn test_min_langid() {
-    let mut id = crate::consts::get_en_gb();
+    let mut id = crate::consts::lang_id_en_gb();
     id.maximize();
     id.minimize();
 
@@ -148,7 +148,7 @@ mod tests {
 
   #[test]
   fn test_max_langid() {
-    let mut id = crate::consts::get_de();
+    let mut id = crate::consts::lang_id_de();
     id.maximize();
     assert_eq!(id.language, "de");
     if let Some(r) = id.region {

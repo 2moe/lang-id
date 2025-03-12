@@ -13,7 +13,7 @@ Using the result of a const fn as a value:
 use lang_id::LangID;
 
 // Compile-time verified language ID
-const DEFAULT_LANG: LangID = lang_id::consts::get_en();
+const DEFAULT_LANG: LangID = lang_id::consts::lang_id_en();
 ```
 
 Description-data Lookup (requires map feature)
@@ -94,7 +94,7 @@ mod tests {
 
   #[test]
   fn test_get_en() {
-    let default_lang = crate::consts::get_en();
+    let default_lang = crate::consts::lang_id_en();
     dbg!(default_lang.language);
   }
 }
