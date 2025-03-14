@@ -76,4 +76,25 @@ mod tests {
     let ja = map.get("ja");
     assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
   }
+
+  #[ignore]
+  #[test]
+  fn generate_id() -> anyhow::Result<()> {
+    // let id: crate::LangID = "zh-Latn-CN".parse()?;
+    // let (lang, script, region) =
+    //   (id.language, id.script.unwrap(), id.region.unwrap());
+    // dbg!(lang, script, region);
+
+    for k in ["zh", "Latn", "CN"].into_iter() {
+      let tiny: TinyAsciiStr<4> = TinyAsciiStr::try_from_str(k).unwrap();
+      let byte = tiny.all_bytes();
+
+      println!("{k}: {}", u32::from_le_bytes(byte.to_owned()));
+    }
+
+    // let byte = zh.all_bytes();
+    // dbg!(zh.unwrap());
+    // dbg!(u64::from_le_bytes(byte.to_owned())); //28261
+    Ok(())
+  }
 }

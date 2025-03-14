@@ -27,7 +27,7 @@ impl ID {
   /// Since `Option<T>.map(|x| y)` cannot be used in **const fn** in rust 1.85,
   /// use match expressions instead.
   #[inline]
-  pub(crate) const fn get_id(self) -> LangID {
+  pub(crate) const fn into_lang_id(self) -> LangID {
     unsafe {
       let language = subtags::Language::from_raw_unchecked(self.language);
 

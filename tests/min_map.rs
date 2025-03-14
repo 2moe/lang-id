@@ -594,6 +594,8 @@ fn new_map() -> io::Result<()> {
     ("zh-Hant-HK", "zh-HK"),
     ("zh-Hant-MO", "zh-MO"),
     ("zh-Hant-TW", "zh-TW"),
+    ("zh-Latn-CN", "zh-pinyin"),
+    ("zh-Latn-CN-pinyin", "zh-pinyin"),
     ("zu", "zu"),
   ];
 
