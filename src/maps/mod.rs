@@ -6,6 +6,9 @@ pub mod description;
 pub mod max;
 pub mod min;
 
+mod max_id;
+pub use max_id::MaxLangID;
+
 // territories
 pub mod en_001_territory_id;
 pub mod en_001_territory_name;
@@ -36,11 +39,21 @@ pub const fn as_tiny<const N: usize>(s: &str) -> TinyAsciiStr<N> {
 type TinyAsciiID = TinyAsciiStr<4>;
 /// Struct representing a language identification code with tiny string
 /// components
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Hash, PartialOrd, Ord)]
 pub struct TinyID {
   pub language: TinyAsciiID,
   pub script: TinyAsciiID,
   pub region: TinyAsciiID,
+}
+
+impl Default for TinyID {
+  fn default() -> Self {
+    Self {
+      language: as_tiny(""),
+      script: as_tiny(""),
+      region: as_tiny(""),
+    }
+  }
 }
 
 /// Implementing the Display trait to enable printing of a TinyID struct

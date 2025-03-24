@@ -1,5 +1,14 @@
 # ChangeLog
 
+## 0.0.6
+
+- add `MaxLangID`
+- `TinyID`: + Copy, Hash, PartialEq, Default
+
+## 0.0.5
+
+- add territory_containment_id.rs & territory_containment_name.rs
+
 ## 0.0.4
 
 - id.rs: `.get_id()` => `.into_lang_id()`
