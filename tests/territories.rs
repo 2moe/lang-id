@@ -371,7 +371,7 @@ fn build_ids_map(map: &HashMap<StrBuf, StrBuf>) -> io::Result<()> {
 ## Example
 
 ```
-let map = lang_id::maps::en_001_territory_ids::map();
+let map = lang_id::maps::en_001_territory_id::map();
 assert_eq!(map.get("419"), Some(&"Latin America"));
 assert_eq!(map.get("CN"), Some(&"China"));
 assert_eq!(map.get("GB"), Some(&"United Kingdom"));
@@ -379,7 +379,7 @@ assert_eq!(map.get("GB"), Some(&"United Kingdom"));
 "##;
   builder::MapBuilder::<u8> {
     raw_doc,
-    mod_name: "en_001_territory_ids",
+    mod_name: "en_001_territory_id",
     str_kv: &vec,
     // map_type: Some("PhfOrderedMap"),
     map_type: MapType::Ordered,
@@ -401,14 +401,14 @@ fn build_names_map(map: &HashMap<StrBuf, StrBuf>) -> io::Result<()> {
 ## Example
 
 ```
-let map = lang_id::maps::en_001_territory_names::map();
+let map = lang_id::maps::en_001_territory_name::map();
 assert_eq!(map.get("Latin America"), Some(&"419"));
 assert_eq!(map.get("China"), Some(&"CN"));
 assert_eq!(map.get("United Kingdom"), Some(&"GB"));
 ```
   "##;
   builder::MapBuilder::<()> {
-    mod_name: "en_001_territory_names",
+    mod_name: "en_001_territory_name",
     raw_doc,
     str_kv: &vec,
     map_type: MapType::Ordered,

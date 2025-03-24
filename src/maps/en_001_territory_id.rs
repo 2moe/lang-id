@@ -3,7 +3,7 @@
 /// ## Example
 ///
 /// ```
-/// let map = lang_id::maps::en_001_territory_ids::map();
+/// let map = lang_id::maps::en_001_territory_id::map();
 /// assert_eq!(map.get("419"), Some(&"Latin America"));
 /// assert_eq!(map.get("CN"), Some(&"China"));
 /// assert_eq!(map.get("GB"), Some(&"United Kingdom"));

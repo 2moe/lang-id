@@ -1,4 +1,6 @@
 use crate::LangID;
+pub mod territory_containment_id;
+pub mod territory_containment_name;
 
 /// Function that takes bytes representing a language identification code and
 /// returns the corresponding LangID If no match is found, the result of
