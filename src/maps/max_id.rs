@@ -19,6 +19,18 @@ pub enum MaxLangID {
   Tiny(TinyID),
 }
 
+impl core::fmt::Display for MaxLangID {
+  fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+    write!(
+      f,
+      "{}-{}-{}",
+      self.get_language(),
+      self.get_script(),
+      self.get_region()
+    )
+  }
+}
+
 impl MaxLangID {
   /// Constructs a maximized locale identifier using CLDR supplementation data
   ///
