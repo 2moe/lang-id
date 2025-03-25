@@ -1,6 +1,6 @@
 [package]
 name = "lang-id"
-version = "0.0.7"
+version = "0.0.8"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT/Apache-2.0"
@@ -9,13 +9,22 @@ categories = ["internationalization", "localization"]
 readme = "docs/Readme.md"
 repository = "https://github.com/2moe/lang-id"
 description = "Const lang-ids and maps are provided, mainly for i18n and l10n."
-exclude = ["/rust-toolchain.toml"]
+exclude = ["/rust-toolchain.toml", "/.github/", "/examples/", "/tests/"]
 
 [features]
 default = ["match"]
 std = []
 map = ["dep:phf", "dep:tinystr", "dep:compact_str"]
 sys-locale = ["dep:sys-locale", "std"]
+nostd-sys-locale = [
+    "dep:libc",
+    "dep:compact_str",
+    # Windows
+    "dep:widestring",
+    "dep:windows-sys",
+]
+# nostd-sys-locale-windows = ["dep:widestring", "dep:windows-sys"]
+
 match = []
 serde = ["unic-langid/serde", "compact_str?/serde"]
 
@@ -24,12 +33,20 @@ tap = "1.0"
 phf = { version = "0.11", optional = true, default-features = false }
 tinystr = { version = "0.8", optional = true, default-features = false }
 unic-langid = { version = "0.9", features = ["likelysubtags"] }
-sys-locale = { version = "0.3", optional = true }
 compact_str = { version = "0.9", optional = true, default-features = false }
+libc = { version = "0.2", optional = true, default-features = false }
+sys-locale = { version = "0.3", optional = true, features = [] }
 
-# [target.'cfg(target_arch = "wasm32")'.dependencies]
-# sys-locale = { version = "0.3.0", optional = true, features = ["js"] }
-# [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+[target.'cfg(all(target_family = "wasm", target_os = "unknown"))'.dependencies]
+sys-locale = { version = "0.3", optional = true, features = ["js"] }
+
+[target.'cfg(windows)'.dependencies]
+widestring = { version = "1.2.0", default-features = false, optional = true, features = [
+    "alloc",
+] }
+windows-sys = { version = "0.59", default-features = false, optional = true, features = [
+    "Win32_Globalization",
+] }
 
 [dev-dependencies]
 anyhow = "1.0"

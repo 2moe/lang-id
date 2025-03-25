@@ -65,6 +65,9 @@ pub mod matches;
 #[cfg(feature = "sys-locale")]
 pub mod sys_locale;
 
+#[cfg(feature = "nostd-sys-locale")]
+pub mod nostd_sys_locale;
+
 #[cfg(feature = "std")]
 #[cfg(test)]
 mod tests {

@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.0.8
+
+- add nostd-sys-locale feature
+
 ## 0.0.7
 
 - `MaxLangID`: add `Display` impl

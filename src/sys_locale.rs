@@ -26,7 +26,7 @@ pub fn try_get_env_locale(env_name: Option<&str>) -> Option<LangID> {
     .unwrap_or("LANG")
     .pipe(env::var)
     .ok()?
-    .pipe_deref(|x| x.split('.').next())
+    .pipe_deref(|x| x.split(['.', '@']).next())
     .and_then(parse_to_opt_langid)
 }
 
