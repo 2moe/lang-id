@@ -430,7 +430,8 @@ assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 | luo        | luo-Latn-KE        | Dholuo, Latn, Kenya                                   |
 | luy        | luy-Latn-KE        | Luluhia, Latn, Kenya                                  |
 | lv         | lv-Latn-LV         | latviešu, latīņu, Latvija                             |
-| lzh        | lzh-Hant-CN        | 文言文, 古典漢字, 華夏                                |
+| lzh        | lzh-Hant-CN        | 文言, 古典漢字, 古之華夏                              |
+| lzh-Hans   | lzh-Hans-CN        | 文言, 简体, 中国                                      |
 | mai        | mai-Deva-IN        | मैथिली, देवनागरी, भारत                                       |
 | mas        | mas-Latn-KE        | Maa, Latn, Kenya                                      |
 | mas-TZ     | mas-Latn-TZ        | Maa, Latn, Tansania                                   |
