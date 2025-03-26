@@ -1,8 +1,12 @@
 # ChangeLog
 
+## 0.0.10
+
+- add const id: ja-romaji (Nihongo, Hepburn-shiki Rōmaji, Nihon)
+
 ## 0.0.9
 
-- add const id: lzh(文言文)
+- add const id: lzh (文言文)
 
 ## 0.0.8
 

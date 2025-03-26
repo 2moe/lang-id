@@ -1720,6 +1720,11 @@ pub const fn lang_id_ja() -> LangID {
   ID::new(24938, None, None).into_lang_id()
 }
 
+/// ja-romaji: (ja-Latn-JP) Nihongo, Hepburn-shiki Rōmaji, Nihon
+pub const fn lang_id_ja_romaji() -> LangID {
+  ID::new(24938, Some(1853120844), Some(20554)).into_lang_id()
+}
+
 /// jgo: (jgo-Latn-CM) Ndaꞌa, mík -ŋwaꞌnɛ yi ɛ́ líŋɛ́nɛ Latɛ̂ŋ, Kamɛlûn
 pub const fn lang_id_jgo() -> LangID {
   ID::new(7300970, None, None).into_lang_id()

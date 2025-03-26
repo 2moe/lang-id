@@ -350,6 +350,7 @@ fn new_map() -> io::Result<()> {
     ("it-SM", "italiano, latino, San Marino"),
     ("it-VA", "italiano, latino, Città del Vaticano"),
     ("ja", "日本語, 日本語の文字, 日本"),
+    ("ja-romaji", "Nihongo, Hepburn-shiki Rōmaji"),
     ("jgo", "Ndaꞌa, mík -ŋwaꞌnɛ yi ɛ́ líŋɛ́nɛ Latɛ̂ŋ, Kamɛlûn"),
     ("jmc", "Kimachame, Latn, Tanzania"),
     ("jv", "Jawa, Latin, Indonésia"),

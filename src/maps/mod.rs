@@ -110,4 +110,10 @@ mod tests {
   fn generate_lzh_id() {
     generate_id(&["lzh", "Hans", "CN"])
   }
+
+  #[ignore]
+  #[test]
+  fn generate_ja_romaji() {
+    generate_id(&["ja", "Latn", "JP"])
+  }
 }
