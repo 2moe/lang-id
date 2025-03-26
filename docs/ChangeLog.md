@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.0.9
+
+- add const id: lzh(文言文)
+
 ## 0.0.8
 
 - add nostd-sys-locale feature

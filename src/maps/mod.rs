@@ -90,16 +90,24 @@ mod tests {
     assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
   }
 
-  #[ignore]
-  #[test]
-  fn generate_id() -> anyhow::Result<()> {
-    for k in ["zh", "Latn", "CN"].into_iter() {
+  fn generate_id(slice: &[&str]) {
+    for k in slice.iter() {
       let tiny: TinyAsciiStr<4> = TinyAsciiStr::try_from_str(k).unwrap();
       let byte = tiny.all_bytes();
 
       println!("{k}: {}", u32::from_le_bytes(byte.to_owned()));
     }
+  }
 
-    Ok(())
+  #[ignore]
+  #[test]
+  fn generate_zh_latn_cn_id() {
+    generate_id(&["zh", "Latn", "CN"])
+  }
+
+  #[ignore]
+  #[test]
+  fn generate_lzh_id() {
+    generate_id(&["lzh", "Hans", "CN"])
   }
 }

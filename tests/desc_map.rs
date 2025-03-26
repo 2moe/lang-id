@@ -395,6 +395,8 @@ fn new_map() -> io::Result<()> {
     ("luo", "Dholuo, Latn, Kenya"),
     ("luy", "Luluhia, Latn, Kenya"),
     ("lv", "latviešu, latīņu, Latvija"),
+    ("lzh", "文言文, 古典漢字, 華夏"),
+    ("lzh-Hans", "文言文, 简体汉字, 现代中国"),
     ("mai", "मैथिली, देवनागरी, भारत"),
     ("mas", "Maa, Latn, Kenya"),
     ("mas-TZ", "Maa, Latn, Tansania"),

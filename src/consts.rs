@@ -2925,6 +2925,16 @@ pub const fn lang_id_zh_pinyin() -> LangID {
   ID::new(26746, Some(1853120844), Some(20035)).into_lang_id()
 }
 
+/// lzh => lzh-Hant-CN: 文言文, 古典漢字, 華夏
+pub const fn lang_id_lzh() -> LangID {
+  ID::new(6847084, None, None).into_lang_id()
+}
+
+/// lzh-Hans => lzh-Hans-CN: 文言文, 简体汉字, 现代中国
+pub const fn lang_id_lzh_hans() -> LangID {
+  ID::new(6847084, Some(1936613704), None).into_lang_id()
+}
+
 /// zu: (zu-Latn-ZA) isiZulu, isi-Latin, iNingizimu Afrika
 pub const fn lang_id_zu() -> LangID {
   ID::new(30074, None, None).into_lang_id()
