@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.0.12
+
+- pub use id::ID as RawID;
+- add `RawID::try_from_str()`
+
 ## 0.0.11
 
 - modify the description of lzh (Literary Chinese)

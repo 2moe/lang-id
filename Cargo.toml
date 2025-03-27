@@ -1,6 +1,6 @@
 [package]
 name = "lang-id"
-version = "0.0.11"
+version = "0.0.12"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT/Apache-2.0"
@@ -9,12 +9,18 @@ categories = ["internationalization", "localization"]
 readme = "docs/Readme.md"
 repository = "https://github.com/2moe/lang-id"
 description = "Const lang-ids and maps are provided, mainly for i18n and l10n."
-exclude = ["/rust-toolchain.toml", "/.github/", "/examples/", "/tests/"]
+exclude = [
+    "/rust-toolchain.toml",
+    "/.github/",
+    # "/examples/",
+    # "/tests/",
+]
 
 [features]
-default = ["match"]
+default = ["match", "consts"]
 std = []
-map = ["dep:phf", "dep:tinystr", "dep:compact_str"]
+consts = []
+map = ["dep:phf", "dep:compact_str"]
 sys-locale = ["dep:sys-locale", "std"]
 nostd-sys-locale = [
     "dep:libc",
@@ -31,7 +37,7 @@ serde = ["unic-langid/serde", "compact_str?/serde"]
 [dependencies]
 tap = "1.0"
 phf = { version = "0.11", optional = true, default-features = false }
-tinystr = { version = "0.8", optional = true, default-features = false }
+tinystr = { version = "0.8", default-features = false }
 unic-langid = { version = "0.9", features = ["likelysubtags"] }
 compact_str = { version = "0.9", optional = true, default-features = false }
 libc = { version = "0.2", optional = true, default-features = false }
