@@ -55,6 +55,7 @@ pub use unic_langid::LanguageIdentifier as LangID;
 
 pub mod error {
   pub type LangidResult<T> = Result<T, LangidError>;
+  pub use tinystr::ParseError as ParseStrError;
   pub use unic_langid::LanguageIdentifierError as LangidError;
 }
 

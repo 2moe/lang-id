@@ -1,4 +1,4 @@
-pub use tinystr::ParseError;
+use tinystr::ParseError;
 use unic_langid::subtags;
 
 use crate::LangID;
@@ -65,7 +65,7 @@ impl ID {
   ///
   /// assert_eq!(
   ///   lzh.to_string(),
-  ///   "RawID::new(6847084, Some(1953390920), None).into_lang_id()"
+  ///   "/*lzh-Hant*/ RawID::new(6847084, Some(1953390920), None).into_lang_id()"
   /// );
   ///
   /// # Ok::<(), tinystr::ParseError>(())
@@ -126,9 +126,9 @@ impl ID {
   /// ```
   /// use lang_id::RawID;
   ///
-  /// let id = RawID::try_from_str("es", "Latn", "419")?;
+  /// let id = RawID::try_from_str("es", "", "419")?;
   /// let bcp47 = id.to_bcp47();
-  /// assert_eq!(bcp47, "es-Latn-419");
+  /// assert_eq!(bcp47, "es-419");
   /// # Ok::<(), tinystr::ParseError>(())
   /// ```
   pub fn to_bcp47(&self) -> compact_str::CompactString {
