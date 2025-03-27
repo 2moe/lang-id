@@ -103,6 +103,7 @@ mod tests {
   }
 
   #[test]
+  #[cfg(feature = "consts")]
   fn test_get_en() {
     let default_lang = crate::consts::lang_id_en();
     dbg!(default_lang.language);

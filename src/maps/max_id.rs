@@ -41,6 +41,7 @@ impl MaxLangID {
   ///
   /// # Examples
   /// ```
+  /// # #[cfg(feature = "consts")] {
   /// use lang_id::maps::MaxLangID;
   ///
   /// let id = lang_id::consts::lang_id_en();
@@ -49,6 +50,7 @@ impl MaxLangID {
   /// let max_id = MaxLangID::new(&id);
   ///
   /// assert_eq!(max_id.get_region(), "US");
+  /// # }
   /// ```
   pub fn new(language: &LangID) -> Self {
     let map = crate::maps::max::map();

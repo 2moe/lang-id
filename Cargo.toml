@@ -21,7 +21,7 @@ default = ["match"]
 std = []
 consts = []
 compact_str = ["dep:compact_str"]
-map = ["dep:phf", "compact_str", "consts"]
+map = ["dep:phf", "compact_str"]
 sys-locale = ["dep:sys-locale", "std", "consts"]
 nostd-sys-locale = [
     "compact_str",
