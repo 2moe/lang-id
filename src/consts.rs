@@ -1,4 +1,4 @@
-use crate::{LangID, id::ID};
+use crate::{LangID, id::RawID as ID};
 
 /// af: (af-Latn-ZA) Afrikaans, Latyn, Suid-Afrika
 pub const fn lang_id_af() -> LangID {

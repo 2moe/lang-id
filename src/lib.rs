@@ -50,7 +50,7 @@ assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 pub mod consts;
 
 mod id;
-pub use id::ID as RawID;
+pub use id::RawID;
 pub use unic_langid::LanguageIdentifier as LangID;
 
 pub mod error {
@@ -58,6 +58,7 @@ pub mod error {
   pub use tinystr::ParseError as ParseStrError;
   pub use unic_langid::LanguageIdentifierError as LangidError;
 }
+pub use error::LangidResult as Result;
 
 #[cfg(feature = "map")]
 pub mod maps;

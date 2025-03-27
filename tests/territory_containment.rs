@@ -4,6 +4,7 @@
 //!
 //! License: UNICODE LICENSE V3
 //! Copyright © 2004-2025 Unicode, Inc.
+#![cfg(feature = "compact_str")]
 
 #[ignore]
 #[test]

@@ -1,6 +1,6 @@
 [package]
 name = "lang-id"
-version = "0.0.13"
+version = "0.0.14"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT/Apache-2.0"
@@ -17,12 +17,12 @@ exclude = [
 ]
 
 [features]
-default = ["match", "consts"]
+default = ["match"]
 std = []
 consts = []
 compact_str = ["dep:compact_str"]
-map = ["dep:phf", "compact_str"]
-sys-locale = ["dep:sys-locale", "std"]
+map = ["dep:phf", "compact_str", "consts"]
+sys-locale = ["dep:sys-locale", "std", "consts"]
 nostd-sys-locale = [
     "compact_str",
     "dep:libc",
@@ -30,9 +30,7 @@ nostd-sys-locale = [
     "dep:widestring",
     "dep:windows-sys",
 ]
-# nostd-sys-locale-windows = ["dep:widestring", "dep:windows-sys"]
-
-match = []
+match = ["consts"]
 serde = ["unic-langid/serde", "compact_str?/serde"]
 
 [dependencies]
@@ -66,7 +64,6 @@ testutils = "0.0.5"
 
 [package.metadata.docs.rs]
 all-features = true
-targets = ["x86_64-unknown-linux-gnu"]
 rustdoc-args = ["--cfg", "__unstable_doc"]
 
 [lints.rust]

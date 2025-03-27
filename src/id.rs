@@ -16,13 +16,13 @@ use crate::LangID;
 /// assert_eq!(id_und().language, "und");
 /// ```
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
-pub struct ID {
+pub struct RawID {
   pub language: u64,
   pub script: Option<u32>,
   pub region: Option<u32>,
 }
 
-impl core::fmt::Display for ID {
+impl core::fmt::Display for RawID {
   fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
     let Self {
       language,
@@ -46,7 +46,7 @@ impl core::fmt::Display for ID {
   }
 }
 
-impl ID {
+impl RawID {
   pub const fn new(language: u64, script: Option<u32>, region: Option<u32>) -> Self {
     Self {
       language,
@@ -63,6 +63,7 @@ impl ID {
   ///
   /// let lzh = RawID::try_from_str("lzh", "Hant", "")?;
   ///
+  /// #[cfg(feature = "compact_str")]
   /// assert_eq!(
   ///   lzh.to_string(),
   ///   "/*lzh-Hant*/ RawID::new(6847084, Some(1953390920), None).into_lang_id()"
@@ -112,7 +113,7 @@ impl ID {
       }),
     };
 
-    let id = ID::new(language, script, region);
+    let id = RawID::new(language, script, region);
 
     Ok(id)
   }
@@ -186,11 +187,14 @@ mod tests {
   use super::*;
 
   #[test]
+  #[cfg(feature = "compact_str")]
   fn test_build_lzh() -> Result<(), ParseError> {
-    let lzh = ID::try_from_str("lzh", "Hant", "")?;
+    let lzh = RawID::try_from_str("lzh", "Hant", "")?;
+    use compact_str::ToCompactString;
+
     assert_eq!(
-      lzh.to_string(),
-      "RawID::new(6847084, Some(1953390920), None).into_lang_id()"
+      lzh.to_compact_string(),
+      "/*lzh-Hant*/ RawID::new(6847084, Some(1953390920), None).into_lang_id()"
     );
     Ok(())
   }
@@ -198,7 +202,7 @@ mod tests {
   #[test]
   #[cfg(feature = "compact_str")]
   fn test_to_bcp47() -> Result<(), ParseError> {
-    let id = ID::try_from_str("es", "Latn", "419")?;
+    let id = RawID::try_from_str("es", "Latn", "419")?;
     let bcp47 = id.to_bcp47();
     assert_eq!(bcp47, "es-Latn-419");
     // dbg!(bcp47);
