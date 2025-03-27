@@ -9,7 +9,7 @@ use crate::LangID;
 /// ```
 /// use lang_id::{LangID, RawID};
 ///
-/// pub const fn id_und() -> LangID {
+/// const fn id_und() -> LangID {
 ///   RawID::new(6581877, None, None).into_lang_id()
 /// }
 ///
@@ -30,10 +30,19 @@ impl core::fmt::Display for ID {
       region,
     } = self;
 
-    write!(
-      f,
-      r##"RawID::new({language}, {script:?}, {region:?}).into_lang_id()"##,
-    )
+    match () {
+      #[cfg(not(feature = "compact_str"))]
+      () => write!(
+        f,
+        r##"RawID::new({language}, {script:?}, {region:?}).into_lang_id()"##,
+      ),
+      #[cfg(feature = "compact_str")]
+      () => write!(
+        f,
+        r##"/*{}*/ RawID::new({language}, {script:?}, {region:?}).into_lang_id()"##,
+        self.to_bcp47(),
+      ),
+    }
   }
 }
 
@@ -61,7 +70,7 @@ impl ID {
   ///
   /// # Ok::<(), tinystr::ParseError>(())
   /// ```
-  pub fn try_from_str(
+  pub const fn try_from_str(
     language: &str,
     script: &str,
     region: &str,
@@ -70,33 +79,81 @@ impl ID {
     type Language = TinyStr<8>;
     type Tiny4 = TinyStr<4>;
 
-    let language = match language {
-      "" => return Err(ParseError::ContainsNull),
-      x => {
-        let tmp = Language::try_from_str(x)?;
+    let language = match language.is_empty() {
+      true => return Err(ParseError::ContainsNull),
+      _ => {
+        let tmp = match Language::try_from_str(language) {
+          Ok(s) => s,
+          Err(e) => return Err(e),
+        };
         u64::from_le_bytes(*tmp.all_bytes())
       }
     };
 
-    let parse_as_u32 = |s| {
-      let bytes = Tiny4::try_from_str(s)?;
-      let num = u32::from_le_bytes(*bytes.all_bytes());
-      Ok::<_, ParseError>(num)
+    let script = match script.is_empty() {
+      true => None,
+      _ => Some({
+        let str = match Tiny4::try_from_str(script) {
+          Ok(s) => s,
+          Err(e) => return Err(e),
+        };
+        u32::from_le_bytes(*str.all_bytes())
+      }),
     };
 
-    let script = match script {
-      "" => None,
-      x => Some(parse_as_u32(x)?),
-    };
-
-    let region = match region {
-      "" => None,
-      x => Some(parse_as_u32(x)?),
+    let region = match region.is_empty() {
+      true => None,
+      _ => Some({
+        let str = match Tiny4::try_from_str(region) {
+          Ok(s) => s,
+          Err(e) => return Err(e),
+        };
+        u32::from_le_bytes(*str.all_bytes())
+      }),
     };
 
     let id = ID::new(language, script, region);
 
     Ok(id)
+  }
+
+  #[cfg(feature = "compact_str")]
+  /// Converts the language identifier to a BCP47-compliant string
+  /// representation.
+  ///
+  /// Constructs a string in `language[-script][-region]` format.
+  ///
+  /// ```
+  /// use lang_id::RawID;
+  ///
+  /// let id = RawID::try_from_str("es", "Latn", "419")?;
+  /// let bcp47 = id.to_bcp47();
+  /// assert_eq!(bcp47, "es-Latn-419");
+  /// # Ok::<(), tinystr::ParseError>(())
+  /// ```
+  pub fn to_bcp47(&self) -> compact_str::CompactString {
+    use compact_str::{CompactString, format_compact};
+    let id = self.into_lang_id();
+
+    let LangID {
+      language,
+      script,
+      region,
+      ..
+    } = id;
+
+    let empty_str = || CompactString::const_new("");
+    format_compact!(
+      "{language}{}{}",
+      match script {
+        Some(s) => format_compact!("-{s}"),
+        _ => empty_str(),
+      },
+      match region {
+        Some(s) => format_compact!("-{s}"),
+        _ => empty_str(),
+      }
+    )
   }
 
   /// Warn: This function is unsafe.
@@ -128,7 +185,6 @@ impl ID {
 mod tests {
   use super::*;
 
-  #[cfg(feature = "std")]
   #[test]
   fn test_build_lzh() -> Result<(), ParseError> {
     let lzh = ID::try_from_str("lzh", "Hant", "")?;
@@ -136,6 +192,16 @@ mod tests {
       lzh.to_string(),
       "RawID::new(6847084, Some(1953390920), None).into_lang_id()"
     );
+    Ok(())
+  }
+
+  #[test]
+  #[cfg(feature = "compact_str")]
+  fn test_to_bcp47() -> Result<(), ParseError> {
+    let id = ID::try_from_str("es", "Latn", "419")?;
+    let bcp47 = id.to_bcp47();
+    assert_eq!(bcp47, "es-Latn-419");
+    // dbg!(bcp47);
     Ok(())
   }
 }

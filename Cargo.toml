@@ -1,6 +1,6 @@
 [package]
 name = "lang-id"
-version = "0.0.12"
+version = "0.0.13"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT/Apache-2.0"
@@ -20,11 +20,12 @@ exclude = [
 default = ["match", "consts"]
 std = []
 consts = []
-map = ["dep:phf", "dep:compact_str"]
+compact_str = ["dep:compact_str"]
+map = ["dep:phf", "compact_str"]
 sys-locale = ["dep:sys-locale", "std"]
 nostd-sys-locale = [
+    "compact_str",
     "dep:libc",
-    "dep:compact_str",
     # Windows
     "dep:widestring",
     "dep:windows-sys",

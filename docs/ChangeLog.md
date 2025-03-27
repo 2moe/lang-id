@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 0.0.13
+
+- add `RawID::to_bcp47()`
+- `RawID::try_from_str` => `const fn`
+- update feature: `compact_str = ["dep:compact_str"]`
+
 ## 0.0.12
 
 - pub use id::ID as RawID;
