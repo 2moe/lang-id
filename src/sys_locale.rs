@@ -1,9 +1,9 @@
 use std::env;
 
-pub use sys_locale::{get_locale as fetch, get_locales as fetch_locales};
+pub use sys_locale::get_locales as fetch_raw_sys_locales;
 use tap::Pipe;
 
-use crate::{LangID, consts::lang_id_en};
+use crate::{LangID, common::try_parse_to_langid, consts::lang_id_en};
 
 /// - env::var("LANG")
 ///   - "C.UTF-8" -> "C" -> parse_to_opt_langid || "en"
@@ -19,15 +19,15 @@ fn unwrap_or_en(id: Option<LangID>) -> LangID {
 
 /// - env_name: None.unwrap_or("LANG")
 ///   - env::var("LANG")
-///     - "C.UTF-8" -> "C" -> parse_to_opt_langid
-///     - "C" -> "C" -> parse_to_opt_langid
+///     - "en_US.UTF-8" -> "en_US" -> try_parse_to_langid -> Some("en-US")
+///     - zh_CN -> try_parse_to_langid -> Some("zh-CN")
 pub fn try_get_env_locale(env_name: Option<&str>) -> Option<LangID> {
   env_name
     .unwrap_or("LANG")
     .pipe(env::var)
     .ok()?
     .pipe_deref(|x| x.split(['.', '@']).next())
-    .and_then(parse_to_opt_langid)
+    .and_then(try_parse_to_langid)
 }
 
 /// On some systems, getting environment variables is faster than fetching
@@ -39,17 +39,11 @@ pub fn try_get_env_locale(env_name: Option<&str>) -> Option<LangID> {
 /// - `env::var("LANG")` || system locale || "en"
 pub fn fetch_env_lang_or_sys_locale() -> LangID {
   try_get_env_locale(None) //
-    .unwrap_or_else(|| fetch_opt().pipe(unwrap_or_en))
-}
-
-/// - If `env::var("LANG")` is Some("en"), then -> "en-Latn-US".
-/// - If `env::var("LANG")` is None, then it fetches the system locale
-///   (maximised).
-///   - If the system locale is "en-GB", then -> "en-Latn-GB".
-pub fn fetch_max_env_lang_or_sys_locale() -> LangID {
-  try_get_env_locale(None)
-    .map(into_max_langid)
-    .unwrap_or_else(fetch_max)
+    .unwrap_or_else(|| {
+      try_fetch_sys()
+        .ok()
+        .pipe(unwrap_or_en)
+    })
 }
 
 /// Returns the current language identification code based on the system's
@@ -57,54 +51,22 @@ pub fn fetch_max_env_lang_or_sys_locale() -> LangID {
 ///
 /// - system locale || `env::var("LANG")` || "en"
 pub fn fetch_sys_or_env_lang() -> LangID {
-  fetch_opt().unwrap_or_else(get_env_lang_or_en)
+  try_fetch_sys()
+    .ok()
+    .unwrap_or_else(get_env_lang_or_en)
 }
 
-/// Maximised/Maximized LangID:
-/// - zh => zh-Hans-CN
-/// - en => en-Latn-US
-/// - de => de-Latn-DE
-pub fn fetch_max() -> LangID {
-  fetch_opt()
-    .map(into_max_langid)
-    .pipe(unwrap_or_en)
-}
-
-/// Minimised/Minimized LangID:
-/// - en-Latn-US => en
-/// - en-US      => en
-/// - en-Latn-GB => en-GB
-/// - zh-Hans-CN => zh
-/// - zh-Hant-TW => zh-TW
-pub fn fetch_min() -> LangID {
-  fetch_opt()
-    .map(|mut x| {
-      x.minimize();
-      x
-    })
-    .pipe(unwrap_or_en)
-}
-
-/// Fetches system's locale and parse to opt LangID
-pub fn fetch_opt() -> Option<LangID> {
-  fetch()
-    .as_deref()
-    .and_then(parse_to_opt_langid)
-}
-// -----------
-fn into_max_langid(mut id: LangID) -> LangID {
-  id.maximize();
-  id
-}
-
-fn parse_to_opt_langid(s: &str) -> Option<LangID> {
-  match s.trim() {
-    "" => None,
-    x => x.parse().ok(),
+/// Fetches system's locale and parse to LangID
+pub fn try_fetch_sys() -> Result<LangID, String> {
+  match sys_locale::get_locale() {
+    Some(raw) => try_parse_to_langid(&raw).ok_or(raw),
+    _ => Err("POSIX".into()),
   }
 }
+// -----------
 
 #[cfg(test)]
+#[cfg(feature = "std")]
 mod tests {
   use std::dbg;
 

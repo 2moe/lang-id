@@ -49,6 +49,8 @@ assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 #[cfg(feature = "consts")]
 pub mod consts;
 
+pub mod common;
+
 mod id;
 pub use id::RawID;
 pub use unic_langid::LanguageIdentifier as LangID;

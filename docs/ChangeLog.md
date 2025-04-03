@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.0.17
+
+- feat(nostd_sys_locale::try_get_system_locale): Preserves original locale string
+
 ## 0.0.16
 
 - update feature(match): `["consts"]` => `[]`
