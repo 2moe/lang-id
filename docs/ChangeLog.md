@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.0.16
+
+- update feature(match): `["consts"]` => `[]`
+
 ## 0.0.15
 
 - update feature(map): `["dep:phf", "compact_str", "consts"]` => `["dep:phf", "compact_str"]`

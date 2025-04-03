@@ -1,3 +1,5 @@
+#![cfg(feature = "consts")]
+
 use crate::{LangID, id::RawID as ID};
 
 /// af: (af-Latn-ZA) Afrikaans, Latyn, Suid-Afrika

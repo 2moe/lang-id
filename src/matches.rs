@@ -1,4 +1,3 @@
-use crate::LangID;
 pub mod territory_containment_id;
 pub mod territory_containment_name;
 
@@ -13,7 +12,8 @@ pub mod territory_containment_name;
 /// let id = lang_id::matches::match_id(language.as_bytes());
 /// assert_eq!(id, lang_id::consts::lang_id_en_gb());
 /// ```
-pub const fn match_id(s: &[u8]) -> LangID {
+#[cfg(feature = "consts")]
+pub const fn match_id(s: &[u8]) -> crate::LangID {
   use crate::consts::*;
   match s {
     b"af" => lang_id_af(),

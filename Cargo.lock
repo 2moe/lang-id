@@ -100,7 +100,7 @@ dependencies = [
 
 [[package]]
 name = "lang-id"
-version = "0.0.15"
+version = "0.0.16"
 dependencies = [
  "anyhow",
  "compact_str",
