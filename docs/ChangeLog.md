@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.0.18
+
+- move consts::lang_id_en() -> `common`
+- update feature(sys-locale): remove "consts"
+
 ## 0.0.17
 
 - feat(nostd_sys_locale::try_get_system_locale): Preserves original locale string

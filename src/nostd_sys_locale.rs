@@ -95,7 +95,7 @@ mod tests {
   #[cfg(feature = "std")]
   fn test_get_system_locale_id() {
     dbg!(get_raw_sys_locale());
-    let id = try_get_system_locale();
+    let id = try_get_system_locale().ok();
     dbg!(id);
   }
 

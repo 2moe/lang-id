@@ -1,6 +1,6 @@
 [package]
 name = "lang-id"
-version = "0.0.17"
+version = "0.0.18"
 edition = "2024"
 rust-version = "1.85"
 license = "MIT/Apache-2.0"
@@ -22,7 +22,7 @@ std = []
 consts = []
 compact_str = ["dep:compact_str"]
 map = ["dep:phf", "compact_str"]
-sys-locale = ["dep:sys-locale", "std", "consts"]
+sys-locale = ["dep:sys-locale", "std"]
 nostd-sys-locale = [
     "compact_str",
     "dep:libc",
@@ -40,7 +40,7 @@ tinystr = { version = "0.8", default-features = false }
 unic-langid = { version = "0.9", features = ["likelysubtags"] }
 compact_str = { version = "0.9", optional = true, default-features = false }
 libc = { version = "0.2", optional = true, default-features = false }
-sys-locale = { version = "0.3", optional = true, features = [] }
+sys-locale = { version = "0.3", optional = true, default-features = false }
 
 [target.'cfg(all(target_family = "wasm", target_os = "unknown"))'.dependencies]
 sys-locale = { version = "0.3", optional = true, features = ["js"] }

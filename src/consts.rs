@@ -1,5 +1,5 @@
-#![cfg(feature = "consts")]
-
+// #![cfg(feature = "consts")]
+pub use crate::common::lang_id_en;
 use crate::{LangID, id::RawID as ID};
 
 /// af: (af-Latn-ZA) Afrikaans, Latyn, Suid-Afrika
@@ -465,11 +465,6 @@ pub const fn lang_id_el() -> LangID {
 /// el-CY: (el-Grek-CY) Ελληνικά, Ελληνικό, Κύπρος
 pub const fn lang_id_el_cy() -> LangID {
   ID::new(27749, None, Some(22851)).into_lang_id()
-}
-
-/// en: (en-Latn-US) English, Latin, United States
-pub const fn lang_id_en() -> LangID {
-  ID::new(28261, None, None).into_lang_id()
 }
 
 /// en-US: (en-Latn-US) English, Latin, United States

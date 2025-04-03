@@ -3,7 +3,7 @@ use std::env;
 pub use sys_locale::get_locales as fetch_raw_sys_locales;
 use tap::Pipe;
 
-use crate::{LangID, common::try_parse_to_langid, consts::lang_id_en};
+use crate::{LangID, common::try_parse_to_langid};
 
 /// - env::var("LANG")
 ///   - "C.UTF-8" -> "C" -> parse_to_opt_langid || "en"
@@ -14,7 +14,7 @@ fn get_env_lang_or_en() -> LangID {
 }
 
 fn unwrap_or_en(id: Option<LangID>) -> LangID {
-  id.unwrap_or_else(lang_id_en)
+  id.unwrap_or_else(crate::common::lang_id_en)
 }
 
 /// - env_name: None.unwrap_or("LANG")
@@ -96,6 +96,7 @@ mod tests {
     })
   }
 
+  #[cfg(feature = "consts")]
   #[test]
   fn test_min_langid() {
     let mut id = crate::consts::lang_id_en_gb();

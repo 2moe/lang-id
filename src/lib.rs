@@ -10,10 +10,12 @@ This library provides a series of const lang-ids (language identifiers) which ca
 Using the result of a const fn as a value:
 
 ```
+# #[cfg(feature = "consts")] {
 use lang_id::LangID;
 
 // Compile-time verified language ID
 const DEFAULT_LANG: LangID = lang_id::consts::lang_id_en();
+# }
 ```
 
 Description-data Lookup (requires map feature)
