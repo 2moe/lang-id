@@ -78,6 +78,7 @@ assert_eq!(ja, Some(&"日本語, 日本語の文字, 日本"));
 | az         | az-Latn-AZ         | azərbaycan, latın, Azərbaycan                         |
 | az-Cyrl    | az-Cyrl-AZ         | азәрбајҹан, Кирил, Азәрбајҹан                         |
 | az-Latn    | az-Latn-AZ         | azərbaycan, latın, Azərbaycan                         |
+| bal        | bal-Arab-PK        | بلوچی, عربی, پاکستان                                  |
 | bas        | bas-Latn-CM        | Ɓàsàa, Latn, Kàmɛ̀rûn                                  |
 | be         | be-Cyrl-BY         | беларуская, кірыліца, Беларусь                        |
 | bem        | bem-Latn-ZM        | Ichibemba, Latn, Zambia                               |

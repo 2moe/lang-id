@@ -47,6 +47,7 @@ fn new_map() -> io::Result<()> {
     ("az", "azərbaycan, latın, Azərbaycan"),
     ("az-Cyrl", "азәрбајҹан, Кирил, Азәрбајҹан"),
     ("az-Latn", "azərbaycan, latın, Azərbaycan"),
+    ("bal", "بلوچی, عربی, پاکستان"),
     ("bas", "Ɓàsàa, Latn, Kàmɛ̀rûn"),
     ("be", "беларуская, кірыліца, Беларусь"),
     ("bem", "Ichibemba, Latn, Zambia"),

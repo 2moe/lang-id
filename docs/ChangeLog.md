@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 0.0.15
+
+- update feature(map): `["dep:phf", "compact_str", "consts"]` => `["dep:phf", "compact_str"]`
+- add id: bal-Arab-PK
+
 ## 0.0.13
 
 - add `RawID::to_bcp47()`

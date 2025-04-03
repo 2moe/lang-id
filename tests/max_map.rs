@@ -51,6 +51,7 @@ fn new_map() -> io::Result<()> {
     ("az", ("az", "Latn", "AZ")),
     ("az-Cyrl", ("az", "Cyrl", "AZ")),
     ("az-Latn", ("az", "Latn", "AZ")),
+    ("bal", ("bal", "Arab", "PK")),
     ("bas", ("bas", "Latn", "CM")),
     ("be", ("be", "Cyrl", "BY")),
     ("bem", ("bem", "Latn", "ZM")),
