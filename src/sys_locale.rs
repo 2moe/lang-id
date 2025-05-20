@@ -34,7 +34,7 @@ pub fn try_get_env_locale(env_name: Option<&str>) -> Option<LangID> {
 /// sys_locale.
 ///
 /// This function first tries to get `env::var("LANG")`, and if it
-/// fails, it then fetches sys_locale.
+/// fails, it then retrieves sys_locale.
 ///
 /// - `env::var("LANG")` || system locale || "en"
 pub fn retrieve_env_lang_or_sys_locale() -> LangID {
@@ -56,7 +56,7 @@ pub fn retrieve_sys_or_env_lang() -> LangID {
     .unwrap_or_else(get_env_lang_or_en)
 }
 
-/// Fetches system's locale and parse to LangID
+/// Retrieves system's locale and parse to LangID
 pub fn try_retrieve_sys() -> Result<LangID, String> {
   match sys_locale::get_locale() {
     Some(raw) => try_parse_to_langid(&raw).ok_or(raw),
