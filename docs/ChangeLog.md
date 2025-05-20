@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 0.0.19
+
+Breaking changes:
+
+- rename sys_locale's apis:
+  - `fetch_` => `retrieve_`
+
 ## 0.0.18
 
 - move consts::lang_id_en() -> `common`

@@ -1,6 +1,6 @@
 use std::env;
 
-pub use sys_locale::get_locales as fetch_raw_sys_locales;
+pub use sys_locale::get_locales as retrieve_raw_sys_locales;
 use tap::Pipe;
 
 use crate::{LangID, common::try_parse_to_langid};
@@ -37,10 +37,10 @@ pub fn try_get_env_locale(env_name: Option<&str>) -> Option<LangID> {
 /// fails, it then fetches sys_locale.
 ///
 /// - `env::var("LANG")` || system locale || "en"
-pub fn fetch_env_lang_or_sys_locale() -> LangID {
+pub fn retrieve_env_lang_or_sys_locale() -> LangID {
   try_get_env_locale(None) //
     .unwrap_or_else(|| {
-      try_fetch_sys()
+      try_retrieve_sys()
         .ok()
         .pipe(unwrap_or_en)
     })
@@ -50,14 +50,14 @@ pub fn fetch_env_lang_or_sys_locale() -> LangID {
 /// locale settings, falling back to `env::var("LANG")` if necessary.
 ///
 /// - system locale || `env::var("LANG")` || "en"
-pub fn fetch_sys_or_env_lang() -> LangID {
-  try_fetch_sys()
+pub fn retrieve_sys_or_env_lang() -> LangID {
+  try_retrieve_sys()
     .ok()
     .unwrap_or_else(get_env_lang_or_en)
 }
 
 /// Fetches system's locale and parse to LangID
-pub fn try_fetch_sys() -> Result<LangID, String> {
+pub fn try_retrieve_sys() -> Result<LangID, String> {
   match sys_locale::get_locale() {
     Some(raw) => try_parse_to_langid(&raw).ok_or(raw),
     _ => Err("POSIX".into()),
@@ -91,7 +91,7 @@ mod tests {
   /// debug: 3.241833ms
   fn bench_get_locale_id() {
     simple_benchmark(|| {
-      let locale_id = fetch_sys_or_env_lang();
+      let locale_id = retrieve_sys_or_env_lang();
       dbg!(locale_id)
     })
   }
